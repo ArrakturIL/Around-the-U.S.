@@ -1,7 +1,7 @@
 .elements {
     width: 100%;
     max-width: 880px;
-    margin: 50px auto 67px;
+    margin: 50px auto 68px;
     display: grid;
     grid-template-columns: repeat(3, 282px);
     grid-template-rows: 361px ;

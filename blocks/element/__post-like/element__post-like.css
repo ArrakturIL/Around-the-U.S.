@@ -4,4 +4,9 @@
     width: 21px;
     height: 19px;
     align-self: center;
+    transition: opacity 0.2s linear;
+}
+
+.element__post-like:hover {
+    opacity: 0.5;
 }

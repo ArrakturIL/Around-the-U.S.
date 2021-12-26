@@ -6,4 +6,9 @@
     padding: 0;
     grid-area: button;
     align-self: flex-end;
+    transition: opacity 0.2s linear;
+}
+
+.profile__edit-button:hover {
+    opacity: 0.6;
 }

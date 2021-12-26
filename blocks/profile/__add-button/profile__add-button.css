@@ -5,4 +5,9 @@
     height: 50px;
     margin-left: auto;
     align-self: center;
+    transition: opacity 0.2s linear;
+}
+
+.profile__add-button:hover {
+    opacity: 0.6;
 }
