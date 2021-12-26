@@ -1,0 +1,7 @@
+.element__post-like {
+    background: url(../../../images/like.svg);
+    border: none;
+    width: 21px;
+    height: 19px;
+    align-self: center;
+}
