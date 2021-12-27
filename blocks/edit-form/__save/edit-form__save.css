@@ -1,0 +1,12 @@
+.edit-form__save {
+    width: 358px;
+    height: 50px;
+    border-radius: 2px;
+    transition: opacity 0.2s linear;
+    background: #000;
+    color: #fff;
+}
+
+.edit-form__save:hover {
+    opacity: 0.8;
+}

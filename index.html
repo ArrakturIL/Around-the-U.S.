@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./pages/index.css" />
+        <link rel="icon" type="image/svg" href="./images/icon.svg" />
         <title>Around The U.S.</title>
     </head>
     <body class="page">
@@ -18,6 +19,30 @@
                 <img class="header__line" src="./images/Line.svg" alt="Line" />
             </div>
         </header>
+        <section class="popup">
+            <div class="popup__overlay"></div>
+            <div class="popup__container">
+                <img alt="close" src="./images/Close Icon.svg" class="popup__close">
+                <form class="edit-form">
+                    <h2 class="edit-form__heading">Edit profile</h2>
+                    <fieldset class="edit-form__input">
+                    <input
+                        type="text"
+                        class="edit-form__text-input edit-form__text-input_el_name"
+                        name="name"
+                        placeholder="Name"
+                    />
+                    <input
+                        type="text"
+                        class="edit-form__text-input edit-form__text-input_el_about"
+                        name="about"
+                        placeholder="About Me"
+                    />
+                </fieldset>
+                    <button class="edit-form__save" type="submit" >Save</button>
+                </form>
+            </div>
+        </section>
         <main class="content">
             <section class="profile">
                 <img

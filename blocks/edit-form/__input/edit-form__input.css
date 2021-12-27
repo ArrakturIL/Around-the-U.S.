@@ -1,0 +1,6 @@
+.edit-form__input {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
