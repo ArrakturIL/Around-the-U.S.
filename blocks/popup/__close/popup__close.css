@@ -4,6 +4,17 @@
     right: -40px;
     transition: opacity 0.2s linear;
 }
-.popup__close:hover {
-    opacity: 0.6;
+@media screen and (min-width: 1024px) {
+    .popup__close:hover {
+        opacity: 0.6;
+    }
+}
+
+@media screen and (max-width: 425px)  {
+    .popup__close {
+        width: 26px;
+        height: 26px;
+        top: -40px;
+        right: 3px;
+    }
 }

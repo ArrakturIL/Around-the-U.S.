@@ -4,3 +4,10 @@
     margin: 0 0 60px;
     align-self: center;
 }
+
+@media screen and (max-width: 425px) {
+    .footer {
+        margin: 0 19px 36px ;
+        max-width: 282px;
+    }
+}

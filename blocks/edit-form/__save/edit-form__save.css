@@ -6,7 +6,15 @@
     background: #000;
     color: #fff;
 }
+@media screen and (min-width: 1024px) {
+    .edit-form__save:hover {
+        opacity: 0.8;
+    }
+}
 
-.edit-form__save:hover {
-    opacity: 0.8;
+@media screen and (max-width: 425px) {
+    .edit-form__save{
+        height: 46px;
+        width: 238px;
+    }
 }

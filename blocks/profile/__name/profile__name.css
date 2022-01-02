@@ -7,3 +7,12 @@
     grid-area: name;
     max-height: 39px;
 }
+
+@media screen and (max-width: 425px) {
+    .profile__name {
+        max-width: 196px;
+        font-size: 22px;
+        line-height: 27px;
+        text-align: center;
+    }
+}

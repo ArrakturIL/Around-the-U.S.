@@ -1,9 +1,13 @@
 .edit-form__text-input {
     max-width: 358px;
     border: none;
-    border-bottom: 1px solid rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     font-size: 14px;
     line-height: 17px;
     color: #000000;
-    
+}
+@media screen and (max-width: 425px) {
+    .edit-form__text-input {
+        max-width: 238px;
+    }
 }

@@ -6,3 +6,12 @@
     margin: 0;
     grid-area: about;
 }
+
+@media screen and (max-width: 425px) {
+    .profile__about {
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        grid-column: 1/3;
+    }
+}
