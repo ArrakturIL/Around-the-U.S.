@@ -1,16 +1,19 @@
 # Project 4: Around The U.S.
 
-### Overview
+![Page Logo](images/icon.svg) 
 
-* Figma
-* Images
+***
 
-**Figma**
+## Project description
 
-* [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
+Paracticum fourth project. Social App for sharing pictures - the first part of the project.
+---
 
-**Images**
+###  Technologi specifications
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
+In the project used flex and grid layouts and media queries for adaptive layouts.
+The site have profile edit form. JS used for interaction of the user with the site profile and like buttons.
 
-Have fun with JavaScript!
+---
+
+[Around the U.S.](https://arrakturil.github.io/Around-the-U.S./)
