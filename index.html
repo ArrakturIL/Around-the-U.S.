@@ -10,36 +10,44 @@
     </head>
     <body class="page">
         <header class="header">
-            
-                <img
-                    class="header__logo"
-                    alt="Around the US"
-                    src="./images/logo.svg"
-                />
-                <div class="header__line"></div> 
-           
+            <img
+                class="header__logo"
+                alt="Around the US"
+                src="./images/logo.svg"
+            />
+            <div class="header__line"></div>
         </header>
-        <section class="popup">
+        <section class="popup popup_hidden">
             <div class="popup__overlay"></div>
             <div class="popup__container">
-                <img alt="close" src="./images/Close Icon.svg" class="popup__close">
+                <img
+                    alt="close"
+                    src="./images/Close Icon.svg"
+                    class="popup__close"
+                />
                 <form class="edit-form">
                     <h2 class="edit-form__heading">Edit profile</h2>
                     <fieldset class="edit-form__input">
-                    <input
-                        type="text"
-                        class="edit-form__text-input edit-form__text-input_el_name"
-                        name="name"
-                        placeholder="Name"
-                    />
-                    <input
-                        type="text"
-                        class="edit-form__text-input edit-form__text-input_el_about"
-                        name="about"
-                        placeholder="About Me"
-                    />
-                </fieldset>
-                    <button class="edit-form__save" type="submit" >Save</button>
+                        <input
+                            id="name"
+                            type="text"
+                            class="
+                                edit-form__text-input
+                                edit-form__text-input_el_name
+                            "
+                            placeholder="Name"
+                        />
+                        <input
+                            id="about"
+                            type="text"
+                            class="
+                                edit-form__text-input
+                                edit-form__text-input_el_about
+                            "
+                            placeholder="About Me"
+                        />
+                    </fieldset>
+                    <button class="edit-form__save" type="submit">Save</button>
                 </form>
             </div>
         </section>
@@ -67,7 +75,7 @@
                     />
                     <div class="element__post-info">
                         <p class="element__post-name">Yosemite Valley</p>
-                        <button class="element__post-like"></button>
+                        <button class="element__post-like element__post-like_active"></button>
                     </div>
                 </article>
 
@@ -79,7 +87,7 @@
                     />
                     <div class="element__post-info">
                         <p class="element__post-name">Lake Louise</p>
-                        <button class="element__post-like"></button>
+                        <button class="element__post-like element__post-like_active"></button>
                     </div>
                 </article>
 
@@ -91,7 +99,7 @@
                     />
                     <div class="element__post-info">
                         <p class="element__post-name">Bald Mountains</p>
-                        <button class="element__post-like"></button>
+                        <button class="element__post-like element__post-like_active"></button>
                     </div>
                 </article>
 
@@ -103,7 +111,7 @@
                     />
                     <div class="element__post-info">
                         <p class="element__post-name">Latemar</p>
-                        <button class="element__post-like"></button>
+                        <button class="element__post-like element__post-like_active"></button>
                     </div>
                 </article>
 
@@ -115,7 +123,7 @@
                     />
                     <div class="element__post-info">
                         <p class="element__post-name">Vanoise Nationa...</p>
-                        <button class="element__post-like"></button>
+                        <button class="element__post-like element__post-like_active"></button>
                     </div>
                 </article>
 
@@ -127,7 +135,7 @@
                     />
                     <div class="element__post-info">
                         <p class="element__post-name">Lago di Braies</p>
-                        <button class="element__post-like"></button>
+                        <button class="element__post-like element__post-like_active"></button>
                     </div>
                 </article>
             </section>
