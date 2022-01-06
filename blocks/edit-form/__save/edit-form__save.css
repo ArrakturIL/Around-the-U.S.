@@ -1,11 +1,18 @@
 .edit-form__save {
+    padding: 0;
+    border: none;
     width: 358px;
     height: 50px;
     border-radius: 2px;
     transition: opacity 0.2s linear;
     background: #000;
     color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
 }
+
 @media screen and (min-width: 1024px) {
     .edit-form__save:hover {
         opacity: 0.8;
@@ -13,7 +20,7 @@
 }
 
 @media screen and (max-width: 425px) {
-    .edit-form__save{
+    .edit-form__save {
         height: 46px;
         width: 238px;
     }

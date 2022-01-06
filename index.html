@@ -12,45 +12,40 @@
         <header class="header">
             <img
                 class="header__logo"
+                rgba(84,
+                84,
+                84,
+                1)
                 alt="Around the US"
                 src="./images/logo.svg"
             />
-            <div class="header__line"></div>
         </header>
-        <section class="popup popup_hidden">
+        <div class="popup popup_hidden">
             <div class="popup__overlay"></div>
             <div class="popup__container">
-                <img
-                    alt="close"
-                    src="./images/Close Icon.svg"
-                    class="popup__close"
-                />
-                <form class="edit-form">
+                <button type="button" class="popup__close"></button>
+                <form name="editForm" class="edit-form">
                     <h2 class="edit-form__heading">Edit profile</h2>
                     <fieldset class="edit-form__input">
                         <input
+                            name="name"
                             id="name"
                             type="text"
-                            class="
-                                edit-form__text-input
-                                edit-form__text-input_el_name
-                            "
+                            class="edit-form__text-input edit-form__text-input_el_name"
                             placeholder="Name"
                         />
                         <input
+                            name="about"
                             id="about"
                             type="text"
-                            class="
-                                edit-form__text-input
-                                edit-form__text-input_el_about
-                            "
+                            class="edit-form__text-input edit-form__text-input_el_about"
                             placeholder="About Me"
                         />
                     </fieldset>
                     <button class="edit-form__save" type="submit">Save</button>
                 </form>
             </div>
-        </section>
+        </div>
         <main class="content">
             <section class="profile">
                 <img
@@ -58,12 +53,12 @@
                     alt="avatar"
                     src="./images/avatar.jpg"
                 />
-                <article class="profile__info">
+                <div class="profile__info">
                     <h1 class="profile__name">Jacques Cousteau</h1>
                     <p class="profile__about">Explorer</p>
-                    <button class="profile__edit-button"></button>
-                </article>
-                <button class="profile__add-button"></button>
+                    <button type="button" class="profile__edit-button"></button>
+                </div>
+                <button type="button" class="profile__add-button"></button>
             </section>
 
             <section class="elements">
@@ -74,8 +69,10 @@
                         src="./images/Yosemite_Valley.jpg"
                     />
                     <div class="element__post-info">
-                        <p class="element__post-name">Yosemite Valley</p>
-                        <button class="element__post-like element__post-like_active"></button>
+                        <h2 class="element__post-name">Yosemite Valley</h2>
+                        <button
+                           type="button" class="element__post-like element__post-like_active"
+                        ></button>
                     </div>
                 </article>
 
@@ -86,8 +83,10 @@
                         src="./images/Lake_Louise.jpg"
                     />
                     <div class="element__post-info">
-                        <p class="element__post-name">Lake Louise</p>
-                        <button class="element__post-like element__post-like_active"></button>
+                        <h2 class="element__post-name">Lake Louise</h2>
+                        <button
+                           type="button" class="element__post-like element__post-like_active"
+                        ></button>
                     </div>
                 </article>
 
@@ -98,8 +97,10 @@
                         src="./images/Bald_Mountains.jpg"
                     />
                     <div class="element__post-info">
-                        <p class="element__post-name">Bald Mountains</p>
-                        <button class="element__post-like element__post-like_active"></button>
+                        <h2 class="element__post-name">Bald Mountains</h2>
+                        <button
+                           type="button" class="element__post-like element__post-like_active"
+                        ></button>
                     </div>
                 </article>
 
@@ -110,8 +111,10 @@
                         src="./images/Latemar.jpg"
                     />
                     <div class="element__post-info">
-                        <p class="element__post-name">Latemar</p>
-                        <button class="element__post-like element__post-like_active"></button>
+                        <h2 class="element__post-name">Latemar</h2>
+                        <button
+                           type="button" class="element__post-like element__post-like_active"
+                        ></button>
                     </div>
                 </article>
 
@@ -122,8 +125,10 @@
                         src="./images/Vanoise.jpg"
                     />
                     <div class="element__post-info">
-                        <p class="element__post-name">Vanoise Nationa...</p>
-                        <button class="element__post-like element__post-like_active"></button>
+                        <h2 class="element__post-name">Vanoise Nationa...</h2>
+                        <button
+                           type="button" class="element__post-like element__post-like_active"
+                        ></button>
                     </div>
                 </article>
 
@@ -134,8 +139,10 @@
                         src="./images/Lago.jpg"
                     />
                     <div class="element__post-info">
-                        <p class="element__post-name">Lago di Braies</p>
-                        <button class="element__post-like element__post-like_active"></button>
+                        <h2 class="element__post-name">Lago di Braies</h2>
+                        <button
+                           type="button" class="element__post-like element__post-like_active"
+                        ></button>
                     </div>
                 </article>
             </section>

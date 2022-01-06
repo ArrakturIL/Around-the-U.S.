@@ -1,4 +1,5 @@
 .element__post-like {
+    padding: 0;
     background: url(../../../images/like.svg);
     border: none;
     width: 21px;
