@@ -23,5 +23,7 @@
     .edit-form__save {
         height: 46px;
         width: 238px;
+        font-size: 14px;
+        line-height: 17px;
     }
 }

@@ -12,15 +12,15 @@ let aboutInput = document.querySelector("#about");
 let profileName = document.querySelector(".profile__name");
 let profileAbout = document.querySelector(".profile__about");
 
-nameInput.value = profileName.textContent;
-aboutInput.value = profileAbout.textContent;
-
 function closeEditForm() {
     editForm.classList.add("popup_hidden");
 }
 
 function openEditForm() {
     editForm.classList.remove("popup_hidden");
+    
+    nameInput.value = profileName.textContent;
+    aboutInput.value = profileAbout.textContent;
 }
 
 function handleProfileFormSubmit(evt) {

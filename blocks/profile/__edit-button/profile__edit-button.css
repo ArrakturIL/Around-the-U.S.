@@ -9,6 +9,7 @@
     transition: opacity 0.2s linear;
     cursor: pointer;
 }
+
 @media screen and (min-width: 1024px) {
     .profile__edit-button:hover {
         opacity: 0.6;
