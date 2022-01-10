@@ -11,7 +11,7 @@
         "about .";
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 880px) {
     .profile__info {
         gap: 10px 14px;
         align-self: center;
