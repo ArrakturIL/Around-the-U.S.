@@ -134,17 +134,28 @@ initialCards.forEach((crad) => {
     renderCard(crad);
 });
 
-function formNewCardSubmitHandler(evt) {
-    evt.preventDefault();
+//function formNewCardSubmitHandler(evt) {
+//    evt.preventDefault();
+//
+//   const card = {
+//        name: cardName.value,
+//        link: cardLink.value,
+ //   };
+//    formNewCard.reset();
+//    renderCard(card);
+ //   closePopup(addNewCard);
+//}
 
+formNewCard.addEventListener("submit", (evt) => {
     const card = {
         name: cardName.value,
         link: cardLink.value,
     };
-    formNewCard.reset();
     renderCard(card);
+    evt.preventDefault();
     closePopup(addNewCard);
-}
+    formNewCard.reset();
+});
 
 const openImagePreview = (card) => {
     openPopup(cardPreview);
@@ -167,5 +178,5 @@ formNewCardClose.addEventListener("click", () => {
     closePopup(addNewCard);
 });
 
-formNewCardSubmit.addEventListener("click", formNewCardSubmitHandler);
+//formNewCardSubmit.addEventListener("submit", formNewCardSubmitHandler);
 

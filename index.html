@@ -59,7 +59,8 @@
                             type="text"
                             class="edit-form__text-input edit-form__text-input_el_title"
                             placeholder="Title"
-                            minlength="1" maxlength="30"
+                            maxlength="30"
+                            minlength="1"
                             required
                         />
                         <input
@@ -71,7 +72,10 @@
                             required
                         />
                     </fieldset>
-                    <button class="edit-form__save edit-form__save_el_new-place" type="submit">
+                    <button
+                        class="edit-form__save edit-form__save_el_new-place"
+                        type="submit"
+                    >
                         Create
                     </button>
                 </form>
@@ -117,10 +121,7 @@
                 <img class="element__post-img" alt="" src="_" />
                 <div class="element__post-info">
                     <h2 class="element__post-name"></h2>
-                    <button
-                        type="button"
-                        class="element__post-like"
-                    ></button>
+                    <button type="button" class="element__post-like"></button>
                 </div>
             </article>
         </template>
