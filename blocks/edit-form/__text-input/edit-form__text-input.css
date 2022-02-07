@@ -19,7 +19,7 @@
 @media screen and (max-width: 425px) {
     .edit-form__text-input {
         max-width: 238px;
-        padding: 0 0 9px ;
+        padding: 0 0 9px;
     }
     .edit-form__text-input:first-of-type {
         margin: 76px 0 30px;

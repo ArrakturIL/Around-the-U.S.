@@ -134,17 +134,6 @@ initialCards.forEach((crad) => {
     renderCard(crad);
 });
 
-//function formNewCardSubmitHandler(evt) {
-//    evt.preventDefault();
-//
-//   const card = {
-//        name: cardName.value,
-//        link: cardLink.value,
- //   };
-//    formNewCard.reset();
-//    renderCard(card);
- //   closePopup(addNewCard);
-//}
 
 formNewCard.addEventListener("submit", (evt) => {
     const card = {
@@ -178,5 +167,4 @@ formNewCardClose.addEventListener("click", () => {
     closePopup(addNewCard);
 });
 
-//formNewCardSubmit.addEventListener("submit", formNewCardSubmitHandler);
 
