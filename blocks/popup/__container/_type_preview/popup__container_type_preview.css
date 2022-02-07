@@ -4,4 +4,5 @@
     max-height: 75vw;
     max-width: 75vw;
     width: auto;
+    display: flex;
 }
