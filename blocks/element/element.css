@@ -2,4 +2,6 @@
     background-color: #fff;
     border-radius: 10px;
     width: 100%;
+    position: relative;
+    height: 361px;
 }
