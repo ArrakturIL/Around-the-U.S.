@@ -1,18 +1,18 @@
 ///Profile Edit///
 
-const editButton = document.querySelector(".profile__edit-button");
+const editProfileButton = document.querySelector(".profile__edit-button");
 
-const closeButton = document.querySelector(".popup__close");
+const closeProfileFormButton = document.querySelector(".popup__close");
 
-const editForm = document.querySelector(".popup");
+const editProfilePopup = document.querySelector(".popup");
 
-const formElement = document.querySelector(".edit-form");
+const editProfileForm = document.querySelector(".edit-form");
 
 const nameInput = document.querySelector("#name");
 const aboutInput = document.querySelector("#about");
 
-let profileName = document.querySelector(".profile__name");
-let profileAbout = document.querySelector(".profile__about");
+const profileName = document.querySelector(".profile__name");
+const profileAbout = document.querySelector(".profile__about");
 
 function openPopup(popup) {
     popup.classList.add("popup_open");
@@ -25,27 +25,30 @@ function closePopup(popup) {
 function handleProfileFormSubmit(evt) {
     evt.preventDefault();
 
-    let nameValue = nameInput.value;
+    const nameValue = nameInput.value;
 
     profileName.textContent = nameValue;
 
-    let aboutValue = aboutInput.value;
+    const aboutValue = aboutInput.value;
 
     profileAbout.textContent = aboutValue;
 
-    closePopup(editForm);
+    closePopup(editProfilePopup);
 }
 
-formElement.addEventListener("submit", handleProfileFormSubmit);
+function editProfileButtonHandler(evt) {
+    evt.preventDefault();
 
-editButton.addEventListener("click", () => {
-    openPopup(editForm);
     nameInput.value = profileName.textContent;
     aboutInput.value = profileAbout.textContent;
-});
+    openPopup(editProfilePopup);
+}
+editProfileForm.addEventListener("submit", handleProfileFormSubmit);
 
-closeButton.addEventListener("click", () => {
-    closePopup(editForm);
+editProfileButton.addEventListener("click", editProfileButtonHandler);
+
+closeProfileFormButton.addEventListener("click", () => {
+    closePopup(editProfilePopup);
 });
 
 ///initial cards///
@@ -78,18 +81,18 @@ const initialCards = [
 ];
 
 ///cards///
-const openAddForm = document.querySelector(".profile__add-button");
-const formNewCardClose = document.querySelector(".popup__close_el_new-place");
-const addNewCard = document.querySelector(".popup_el_new-place");
-const formNewCardSubmit = document.querySelector(
+const openAddFormButton = document.querySelector(".profile__add-button");
+const closeAddFormButton = document.querySelector(".popup__close_el_new-place");
+const addNewCardPopup = document.querySelector(".popup_el_new-place");
+const addNewCardFormSubmit = document.querySelector(
     ".edit-form__save_el_new-place"
 );
-const formNewCard = document.querySelector(".edit-form_el_new-place");
+const addNewCardForm = document.querySelector(".edit-form_el_new-place");
 const cardTemplate = document.querySelector("#card-template").content;
 const cardPreview = document.querySelector(".popup_el_preview");
 const cardPreviewClose = document.querySelector(".popup__close_el_preview");
-let cardName = document.querySelector("#title");
-let cardLink = document.querySelector("#link");
+const cardName = document.querySelector("#title");
+const cardLink = document.querySelector("#link");
 
 ///Cards container///
 const cardList = document.querySelector(".elements");
@@ -134,16 +137,15 @@ initialCards.forEach((crad) => {
     renderCard(crad);
 });
 
-
-formNewCard.addEventListener("submit", (evt) => {
+addNewCardForm.addEventListener("submit", (evt) => {
+    evt.preventDefault();
     const card = {
         name: cardName.value,
         link: cardLink.value,
     };
     renderCard(card);
-    evt.preventDefault();
-    closePopup(addNewCard);
-    formNewCard.reset();
+    closePopup(addNewCardPopup);
+    addNewCardForm.reset();
 });
 
 const openImagePreview = (card) => {
@@ -159,12 +161,10 @@ cardPreviewClose.addEventListener("click", () => {
     closePopup(cardPreview);
 });
 
-openAddForm.addEventListener("click", () => {
-    openPopup(addNewCard);
+openAddFormButton.addEventListener("click", () => {
+    openPopup(addNewCardPopup);
 });
 
-formNewCardClose.addEventListener("click", () => {
-    closePopup(addNewCard);
+closeAddFormButton.addEventListener("click", () => {
+    closePopup(addNewCardPopup);
 });
-
-
