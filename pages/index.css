@@ -11,10 +11,15 @@
 @import url(../blocks/popup/__description/popup__description.css);
 
 @import url(../blocks/edit-form/edit-form.css);
+@import url(../blocks/edit-form/__label/edit-form__label.css);
 @import url(../blocks/edit-form/__input/edit-form__input.css);
 @import url(../blocks/edit-form/__heading/edit-form__heading.css);
 @import url(../blocks/edit-form/__text-input/edit-form__text-input.css);
 @import url(../blocks/edit-form/__save/edit-form__save.css);
+@import url(../blocks/edit-form/__error/edit-form__error.css);
+@import url(../blocks/edit-form/__error/_visible/edit-form__error_visible.css);
+@import url(../blocks/edit-form/__save/_disabled/edit-form__save_disabled.css);
+@import url(../blocks/edit-form/__text-input/_error/edit-form__text-input_type_error.css);
 
 @import url(../blocks/content/content.css);
 
