@@ -17,7 +17,7 @@
             />
         </header>
         <!---profile--->
-        <div class="popup">
+        <div class="popup popup_el_profile">
             <div class="popup__container">
                 <button type="button" class="popup__close"></button>
                 <form name="editForm" class="edit-form" novalidate>
@@ -65,6 +65,7 @@
                 <form name="editForm" class="edit-form edit-form_el_new-place" novalidate>
                     <h2 class="edit-form__heading">New Place</h2>
                     <fieldset class="edit-form__input">
+                        <label class="edit-form__label">
                         <input
                             name="title"
                             id="title"
@@ -76,6 +77,8 @@
                             required
                         />
                         <span id="title-error" class="edit-form__error"></span>
+                        </label>
+                        <label class="edit-form__label">
                         <input
                             name="imageLink"
                             id="link"
@@ -85,6 +88,7 @@
                             required
                         />
                         <span id="link-error" class="edit-form__error"></span>
+                        </label>
                     </fieldset>
                     <button
                         class="edit-form__save edit-form__save_el_new-place"

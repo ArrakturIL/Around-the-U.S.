@@ -17,8 +17,8 @@ const showInputError = (
     const errorElement = formElement.querySelector("#" + input.id + "-error");
     console.log(input.validationMessage)
     errorElement.textContent = input.validationMessage;
-    input.classList.add("edit-form__text-input_type_error");
-    errorElement.classList.add("edit-form__error_visible");
+    input.classList.add(inputErrorClass);
+    errorElement.classList.add(errorClass);
 };
 
 const hideInputError = (
@@ -28,8 +28,8 @@ const hideInputError = (
 ) => {
     const errorElement = formElement.querySelector("#" + input.id + "-error");
     errorElement.textContent = "";
-    errorElement.classList.remove(inputErrorClass);
-    input.classList.remove(errorClass);
+    input.classList.remove(inputErrorClass);
+    errorElement.classList.remove(errorClass);
 };
 
 const checkInputValidity = (input, formElement, settings) => {
@@ -46,10 +46,10 @@ const hasValidInput = (inputList) =>
 const toggleButtonState = (button, inputList, settings) => {
     if (hasValidInput(inputList)) {
         button.removeAttribute("disabled");
-        button.classList.remove(settings.buttonDisabledClass);
+        button.classList.remove(settings.inactiveButtonClass);
     } else {
         button.setAttribute("disabled", true);
-        button.classList.add(settings.buttonDisabledClass);
+        button.classList.add(settings.inactiveButtonClass);
     }
 };
 
@@ -74,3 +74,4 @@ enableValidation({
     inputErrorClass: "edit-form__input_type_error",
     errorClass: "edit-form__error_visible",
 });
+

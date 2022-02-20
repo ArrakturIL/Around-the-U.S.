@@ -4,7 +4,7 @@ const editProfileButton = document.querySelector(".profile__edit-button");
 
 const closeProfileFormButton = document.querySelector(".popup__close");
 
-const editProfilePopup = document.querySelector(".popup");
+const editProfilePopup = document.querySelector(".popup_el_profile");
 
 const editProfileForm = document.querySelector(".edit-form");
 
@@ -50,6 +50,31 @@ editProfileButton.addEventListener("click", editProfileButtonHandler);
 closeProfileFormButton.addEventListener("click", () => {
     closePopup(editProfilePopup);
 });
+
+///closing popup esc key///
+function closePopupEsc() {
+    document.addEventListener("keydown", (evt) => {
+        if (evt.key === "Escape") {
+            closePopup(editProfilePopup);
+            closePopup(cardPreview);
+            closePopup(addNewCardPopup);
+        }
+    });
+}
+closePopupEsc();
+
+///closing popup overlay click///
+const popupList = document.querySelectorAll(".popup");
+
+popupList.forEach((popup) => {
+    popup.addEventListener("click", (evt) => {
+        if (evt.target.classList.contains("popup")) {
+            closePopup(editProfilePopup);
+            closePopup(cardPreview);
+            closePopup(addNewCardPopup);
+        }
+    });
+}); 
 
 ///initial cards///
 
@@ -167,4 +192,5 @@ openAddFormButton.addEventListener("click", () => {
 
 closeAddFormButton.addEventListener("click", () => {
     closePopup(addNewCardPopup);
+    addNewCardForm.reset();
 });
