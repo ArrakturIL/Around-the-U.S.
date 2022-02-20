@@ -15,7 +15,7 @@ const showInputError = (
     { errorClass, inputErrorClass }
 ) => {
     const errorElement = formElement.querySelector("#" + input.id + "-error");
-    console.log(input.validationMessage)
+    console.log(input.validationMessage);
     errorElement.textContent = input.validationMessage;
     input.classList.add(inputErrorClass);
     errorElement.classList.add(errorClass);
@@ -66,6 +66,25 @@ const setEventListeners = (formElement, settings) => {
     });
 };
 
+///reset validation/////
+
+///function resetValidation(formElement, settings) {
+//   const inputList = Array.from(
+//      formElement.querySelectorAll(settings.inputSelector)
+//);
+//    inputList.forEach((input) => {
+//        input.classList.remove(settings.inputErrorClass);
+//        const errorElement = formElement.querySelector(
+//            "#" + input.id + "-error"
+//       );
+//        errorElement.textContent = "";
+//        errorElement.classList.remove(settings.errorClass);
+//    });
+//    const button = formElement.querySelector(settings.submitButtonSelector);
+//    button.removeAttribute("disabled");
+//    button.classList.remove(settings.inactiveButtonClass);
+//}
+
 enableValidation({
     formSelector: ".edit-form",
     inputSelector: ".edit-form__text-input",
@@ -74,4 +93,3 @@ enableValidation({
     inputErrorClass: "edit-form__input_type_error",
     errorClass: "edit-form__error_visible",
 });
-

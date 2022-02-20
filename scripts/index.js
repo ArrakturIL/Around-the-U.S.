@@ -1,3 +1,5 @@
+import resetValidation from "../scripts/validator.js";
+
 ///Profile Edit///
 
 const editProfileButton = document.querySelector(".profile__edit-button");
@@ -20,6 +22,7 @@ function openPopup(popup) {
 
 function closePopup(popup) {
     popup.classList.remove("popup_open");
+    resetValidation();
 }
 
 function handleProfileFormSubmit(evt) {
