@@ -1,4 +1,3 @@
-
 ///Profile Edit///
 
 const editProfileButton = document.querySelector(".profile__edit-button");
@@ -21,7 +20,6 @@ function openPopup(popup) {
 
 function closePopup(popup) {
     popup.classList.remove("popup_open");
-    resetValidation();
 }
 
 function handleProfileFormSubmit(evt) {
@@ -76,7 +74,7 @@ popupList.forEach((popup) => {
             closePopup(addNewCardPopup);
         }
     });
-}); 
+});
 
 ///initial cards///
 

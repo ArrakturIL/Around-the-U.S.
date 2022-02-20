@@ -1,14 +1,5 @@
 //// Form Validator////
 
-const enableValidation = (settings) => {
-    const formList = document.querySelectorAll(settings.formSelector);
-    console.log(formList);
-    formList.forEach((formElement) => {
-        formElement.addEventListener("submit", (evt) => evt.preventDefault());
-        setEventListeners(formElement, settings);
-    });
-};
-
 const showInputError = (
     input,
     formElement,
@@ -59,31 +50,21 @@ const setEventListeners = (formElement, settings) => {
     );
     const button = formElement.querySelector(settings.submitButtonSelector);
     inputList.forEach((input) => {
-        input.addEventListener("input", () => {
+        input.addEventListener("input", (evt) => {
             checkInputValidity(input, formElement, settings);
             toggleButtonState(button, inputList, settings);
         });
     });
 };
 
-///reset validation/////
-
-///function resetValidation(formElement, settings) {
-//   const inputList = Array.from(
-//      formElement.querySelectorAll(settings.inputSelector)
-//);
-//    inputList.forEach((input) => {
-//        input.classList.remove(settings.inputErrorClass);
-//        const errorElement = formElement.querySelector(
-//            "#" + input.id + "-error"
-//       );
-//        errorElement.textContent = "";
-//        errorElement.classList.remove(settings.errorClass);
-//    });
-//    const button = formElement.querySelector(settings.submitButtonSelector);
-//    button.removeAttribute("disabled");
-//    button.classList.remove(settings.inactiveButtonClass);
-//}
+const enableValidation = (settings) => {
+    const formList = document.querySelectorAll(settings.formSelector);
+    console.log(formList);
+    formList.forEach((formElement) => {
+        formElement.addEventListener("submit", (evt) => evt.preventDefault());
+        setEventListeners(formElement, settings);
+    });
+};
 
 enableValidation({
     formSelector: ".edit-form",
