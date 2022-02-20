@@ -1,4 +1,3 @@
-import resetValidation from "../scripts/validator.js";
 
 ///Profile Edit///
 
