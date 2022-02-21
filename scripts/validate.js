@@ -31,11 +31,8 @@ const checkInputValidity = (input, formElement, settings) => {
 };
 
 const hasInvalidInput = (inputList) => {
-    console.log(inputList);
     return inputList.some((input) => !input.validity.valid);
 };
-
-// inputList.every((input) => input.validity.valid === true);
 
 const toggleButtonState = (button, inputList, settings) => {
     if (hasInvalidInput(inputList)) {
@@ -48,7 +45,7 @@ const toggleButtonState = (button, inputList, settings) => {
 };
 
 const setEventListeners = (formElement, settings) => {
-    const inputList = formElement.querySelectorAll(settings.inputSelector);
+    const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
 
     const button = formElement.querySelector(settings.submitButtonSelector);
     inputList.forEach((input) => {
@@ -61,7 +58,6 @@ const setEventListeners = (formElement, settings) => {
 
 const enableValidation = (settings) => {
     const formList = document.querySelectorAll(settings.formSelector);
-    console.log(formList);
     formList.forEach((formElement) => {
         formElement.addEventListener("submit", (evt) => evt.preventDefault());
         setEventListeners(formElement, settings);

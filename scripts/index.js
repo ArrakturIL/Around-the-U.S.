@@ -16,10 +16,12 @@ const profileAbout = document.querySelector(".profile__about");
 
 function openPopup(popup) {
     popup.classList.add("popup_open");
+    document.addEventListener("keydown", handleEscKey);
 }
 
 function closePopup(popup) {
     popup.classList.remove("popup_open");
+    document.removeEventListener("keydown", handleEscKey);
 }
 
 function handleProfileFormSubmit(evt) {
@@ -42,6 +44,7 @@ function editProfileButtonHandler(evt) {
     nameInput.value = profileName.textContent;
     aboutInput.value = profileAbout.textContent;
     openPopup(editProfilePopup);
+    editProfileForm.reset();
 }
 editProfileForm.addEventListener("submit", handleProfileFormSubmit);
 
@@ -51,27 +54,20 @@ closeProfileFormButton.addEventListener("click", () => {
     closePopup(editProfilePopup);
 });
 
-///closing popup esc key///
-function closePopupEsc() {
-    document.addEventListener("keydown", (evt) => {
-        if (evt.key === "Escape") {
-            closePopup(editProfilePopup);
-            closePopup(cardPreview);
-            closePopup(addNewCardPopup);
-        }
-    });
-}
-closePopupEsc();
-
-///closing popup overlay click///
+///PopupList///
 const popupList = document.querySelectorAll(".popup");
 
+///closing  popup esc key function///
+function handleEscKey(evt) {
+    if (evt.key === "Escape") {
+        closePopup(document.querySelector(".popup_open"));
+    }
+};
+///closing popup overlay click///
 popupList.forEach((popup) => {
     popup.addEventListener("click", (evt) => {
-        if (evt.target.classList.contains("popup")) {
-            closePopup(editProfilePopup);
-            closePopup(cardPreview);
-            closePopup(addNewCardPopup);
+        if (evt.target.classList.contains("popup_open")) {
+            closePopup(evt.target);
         }
     });
 });
@@ -188,9 +184,9 @@ cardPreviewClose.addEventListener("click", () => {
 
 openAddFormButton.addEventListener("click", () => {
     openPopup(addNewCardPopup);
+    addNewCardForm.reset();
 });
 
 closeAddFormButton.addEventListener("click", () => {
     closePopup(addNewCardPopup);
-    addNewCardForm.reset();
 });
