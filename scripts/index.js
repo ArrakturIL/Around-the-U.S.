@@ -44,7 +44,6 @@ function editProfileButtonHandler(evt) {
     nameInput.value = profileName.textContent;
     aboutInput.value = profileAbout.textContent;
     openPopup(editProfilePopup);
-    editProfileForm.reset();
 }
 editProfileForm.addEventListener("submit", handleProfileFormSubmit);
 
@@ -190,3 +189,4 @@ openAddFormButton.addEventListener("click", () => {
 closeAddFormButton.addEventListener("click", () => {
     closePopup(addNewCardPopup);
 });
+
