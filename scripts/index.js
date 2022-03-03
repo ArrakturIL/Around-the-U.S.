@@ -1,9 +1,14 @@
+/* ========================================================================== */
+/* =                             IMPORTS                                    = */
+/* ========================================================================== */
+
 import { initialCards as items } from "./cards.js";
 import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
 import * as func from "./utils.js";
 
 /* ========================================================================== */
-/* =                             Variables                                  = */
+/* =                             VARIABLES                                  = */
 /* ========================================================================== */
 
 ///------------------------------PROFILE-------------------------------------///
@@ -46,9 +51,11 @@ items.forEach((item) => {
 /* ========================================================================== */
 editProfileForm.addEventListener("submit", func.handleProfileFormSubmit);
 editProfileButton.addEventListener("click", func.editProfileButtonHandler);
+
 closeProfileFormButton.addEventListener("click", () => {
     func.closePopup(func.editProfilePopup);
 });
+
 addNewCardForm.addEventListener("submit", (evt) => {
     evt.preventDefault();
     const newCard = new Card(
@@ -63,6 +70,7 @@ addNewCardForm.addEventListener("submit", (evt) => {
     func.closePopup(addNewCardPopup);
     addNewCardForm.reset();
 });
+
 cardPreviewClose.addEventListener("click", () => {
     func.closePopup(func.cardPreview);
 });
@@ -88,3 +96,5 @@ popupList.forEach((popup) => {
 ///------------------------------------------------------------------------///
 
 
+func.enableValidation(editProfileForm);
+func.enableValidation(addNewCardForm);
