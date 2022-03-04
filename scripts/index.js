@@ -50,15 +50,17 @@ items.forEach((item) => {
 /* =                             EVENTLISTENERS                             = */
 /* ========================================================================== */
 editProfileForm.addEventListener("submit", func.handleProfileFormSubmit);
+
 editProfileButton.addEventListener(
     "click",
     func.editProfileButtonHandler,
-    func.enableValidation(editProfileForm)
+    // func.enableValidation(editProfileForm)    
 );
 
 closeProfileFormButton.addEventListener("click", () => {
     func.closePopup(func.editProfilePopup);
     func.resetValidation(editProfileForm);
+    editProfileForm.reset();
 });
 
 addNewCardForm.addEventListener("submit", (evt) => {
@@ -82,7 +84,7 @@ cardPreviewClose.addEventListener("click", () => {
 
 openAddFormButton.addEventListener("click", () => {
     func.openPopup(addNewCardPopup);
-    func.enableValidation(addNewCardForm);
+    // func.enableValidation(addNewCardForm);
     addNewCardForm.reset();
 });
 
@@ -101,3 +103,5 @@ popupList.forEach((popup) => {
     });
 });
 ///------------------------------------------------------------------------///
+
+func.enableValidation();

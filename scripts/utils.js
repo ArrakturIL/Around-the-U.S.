@@ -7,13 +7,12 @@ import FormValidator from "./FormValidator.js";
 /* ========================================================================== */
 /* =                             VARIABLES                                  = */
 /* ========================================================================== */
-
-const nameInput = document.querySelector("#name");
-const aboutInput = document.querySelector("#about");
-const profileName = document.querySelector(".profile__name");
-const profileAbout = document.querySelector(".profile__about");
-
 ///------------------------------EXPORT VAR-------------------------------------///
+
+export const nameInput = document.querySelector("#name");
+export const aboutInput = document.querySelector("#about");
+export const profileName = document.querySelector(".profile__name");
+export const profileAbout = document.querySelector(".profile__about");
 
 export const cardPreview = document.querySelector(".popup_el_preview");
 export const popupImage = cardPreview.querySelector(".popup__image");
@@ -23,7 +22,6 @@ export const editProfilePopup = document.querySelector(".popup_el_profile");
 /* ========================================================================== */
 /* =                             FUNCTIONS                                  = */
 /* ========================================================================== */
-
 
 export function openPopup(popup) {
     popup.classList.add("popup_open");
@@ -49,12 +47,10 @@ export function handleProfileFormSubmit(evt) {
 
 export function editProfileButtonHandler(evt) {
     evt.preventDefault();
-
+    
     nameInput.value = profileName.textContent;
     aboutInput.value = profileAbout.textContent;
-
     openPopup(editProfilePopup);
-    
 }
 
 export function handleEscKey(evt) {
@@ -86,4 +82,4 @@ export const formValidatorData = {
     inactiveButtonClass: "edit-form__save_disabled",
     inputErrorClass: "edit-form__input_type_error",
     errorClass: "edit-form__error_visible",
-}
+};
