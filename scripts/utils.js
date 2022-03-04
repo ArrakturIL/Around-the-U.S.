@@ -26,11 +26,14 @@ export const editProfilePopup = document.querySelector(".popup_el_profile");
 export function openPopup(popup) {
     popup.classList.add("popup_open");
     document.addEventListener("keydown", handleEscKey);
+    enableValidation();
+    
 }
 
 export function closePopup(popup) {
     popup.classList.remove("popup_open");
     document.removeEventListener("keydown", handleEscKey);
+    resetValidation();
 }
 
 export function handleProfileFormSubmit(evt) {

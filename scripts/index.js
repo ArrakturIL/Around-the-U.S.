@@ -90,7 +90,7 @@ openAddFormButton.addEventListener("click", () => {
 
 closeAddFormButton.addEventListener("click", () => {
     func.closePopup(addNewCardPopup);
-    func.resetValidation(addNewCardForm);
+    
 });
 ///------------------------------------------------------------------------///
 
@@ -104,4 +104,3 @@ popupList.forEach((popup) => {
 });
 ///------------------------------------------------------------------------///
 
-func.enableValidation();
