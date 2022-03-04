@@ -54,6 +54,7 @@ export function editProfileButtonHandler(evt) {
     aboutInput.value = profileAbout.textContent;
 
     openPopup(editProfilePopup);
+    
 }
 
 export function handleEscKey(evt) {
@@ -63,14 +64,14 @@ export function handleEscKey(evt) {
 }
 
 //enableValidation on all forms function
-export function enableValidation(formElement, formSubmitfunction) {
-    new FormValidator(formValidatorData, formElement, formSubmitfunction).enableValidation();
+export function enableValidation(formElement) {
+    new FormValidator(formValidatorData, formElement).enableValidation();
 }
 
 //resetValidation on all forms function
-//export function resetValidation(formElement) {
-   // new FormValidator(formValidatorData, formElement).resetValidation();
-//}
+export function resetValidation(formElement) {
+    new FormValidator(formValidatorData, formElement).resetValidation();
+}
 
 /* ========================================================================== */
 /* =                             DATA                                       = */
