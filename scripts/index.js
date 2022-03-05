@@ -54,12 +54,12 @@ editProfileForm.addEventListener("submit", func.handleProfileFormSubmit);
 editProfileButton.addEventListener(
     "click",
     func.editProfileButtonHandler,
-    // func.enableValidation(editProfileForm)    
+    // func.enableValidation(editProfileForm),
 );
 
 closeProfileFormButton.addEventListener("click", () => {
     func.closePopup(func.editProfilePopup);
-    func.resetValidation(editProfileForm);
+    func.resetFormValidation(editProfileForm);
     editProfileForm.reset();
 });
 

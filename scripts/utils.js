@@ -4,6 +4,22 @@
 
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
+
+/* ========================================================================== */
+/* =                             DATA                                       = */
+/* ========================================================================== */
+
+///------------------------------VALIDATOR-----------------------------------///
+
+export const formValidatorData = {
+    formSelector: ".edit-form",
+    inputSelector: ".edit-form__text-input",
+    submitButtonSelector: ".edit-form__save",
+    inactiveButtonClass: "edit-form__save_disabled",
+    inputErrorClass: "edit-form__input_type_error",
+    errorClass: "edit-form__error_visible",
+};
+
 /* ========================================================================== */
 /* =                             VARIABLES                                  = */
 /* ========================================================================== */
@@ -26,14 +42,13 @@ export const editProfilePopup = document.querySelector(".popup_el_profile");
 export function openPopup(popup) {
     popup.classList.add("popup_open");
     document.addEventListener("keydown", handleEscKey);
-    enableValidation();
-    
+    enableFormValidation(popup);
 }
 
 export function closePopup(popup) {
     popup.classList.remove("popup_open");
     document.removeEventListener("keydown", handleEscKey);
-    resetValidation();
+    resetFormValidation(popup);
 }
 
 export function handleProfileFormSubmit(evt) {
@@ -63,26 +78,13 @@ export function handleEscKey(evt) {
 }
 
 //enableValidation on all forms function
-export function enableValidation(formElement) {
+export function enableFormValidation(formElement) {
     new FormValidator(formValidatorData, formElement).enableValidation();
 }
 
 //resetValidation on all forms function
-export function resetValidation(formElement) {
+export function resetFormValidation(formElement) {
     new FormValidator(formValidatorData, formElement).resetValidation();
 }
 
-/* ========================================================================== */
-/* =                             DATA                                       = */
-/* ========================================================================== */
 
-///------------------------------VALIDATOR-----------------------------------///
-
-export const formValidatorData = {
-    formSelector: ".edit-form",
-    inputSelector: ".edit-form__text-input",
-    submitButtonSelector: ".edit-form__save",
-    inactiveButtonClass: "edit-form__save_disabled",
-    inputErrorClass: "edit-form__input_type_error",
-    errorClass: "edit-form__error_visible",
-};
