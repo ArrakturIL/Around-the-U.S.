@@ -6,7 +6,7 @@ import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 
 /* ========================================================================== */
-/* =                             DATA                                       = */
+/* =                               DATA                                     = */
 /* ========================================================================== */
 
 ///------------------------------VALIDATOR-----------------------------------///
@@ -23,7 +23,13 @@ export const formValidatorData = {
 /* ========================================================================== */
 /* =                             VARIABLES                                  = */
 /* ========================================================================== */
-///------------------------------EXPORT VAR-------------------------------------///
+
+
+
+///------------------------------EXPORT VAR-----------------------------------///
+
+export const editProfilePopup = document.querySelector(".popup_el_profile");
+export const addNewCardPopup = document.querySelector(".popup_el_new-place");
 
 export const nameInput = document.querySelector("#name");
 export const aboutInput = document.querySelector("#about");
@@ -33,7 +39,17 @@ export const profileAbout = document.querySelector(".profile__about");
 export const cardPreview = document.querySelector(".popup_el_preview");
 export const popupImage = cardPreview.querySelector(".popup__image");
 export const popupTitle = cardPreview.querySelector(".popup__description");
-export const editProfilePopup = document.querySelector(".popup_el_profile");
+
+///----------------------------EXPORT FORMVALIDATOR----------------------------///
+
+export const profileFormValidator = new FormValidator(
+    formValidatorData,
+    editProfilePopup
+);
+export const cardFormValidator = new FormValidator(
+    formValidatorData,
+    addNewCardPopup
+);
 
 /* ========================================================================== */
 /* =                             FUNCTIONS                                  = */
@@ -42,13 +58,11 @@ export const editProfilePopup = document.querySelector(".popup_el_profile");
 export function openPopup(popup) {
     popup.classList.add("popup_open");
     document.addEventListener("keydown", handleEscKey);
-    enableFormValidation(popup);
 }
 
 export function closePopup(popup) {
     popup.classList.remove("popup_open");
     document.removeEventListener("keydown", handleEscKey);
-    resetFormValidation(popup);
 }
 
 export function handleProfileFormSubmit(evt) {
@@ -63,11 +77,12 @@ export function handleProfileFormSubmit(evt) {
     closePopup(editProfilePopup);
 }
 
-export function editProfileButtonHandler(evt) {
+export function openProfilePopup(evt) {
     evt.preventDefault();
-    
+
     nameInput.value = profileName.textContent;
     aboutInput.value = profileAbout.textContent;
+    profileFormValidator.resetValidation();
     openPopup(editProfilePopup);
 }
 
@@ -77,14 +92,8 @@ export function handleEscKey(evt) {
     }
 }
 
-//enableValidation on all forms function
-export function enableFormValidation(formElement) {
-    new FormValidator(formValidatorData, formElement).enableValidation();
+export function createCard(item) {
+    const card = new Card(item, "#card-template");
+    const cardElement = card.renderCard();
+    return cardElement;
 }
-
-//resetValidation on all forms function
-export function resetFormValidation(formElement) {
-    new FormValidator(formValidatorData, formElement).resetValidation();
-}
-
-

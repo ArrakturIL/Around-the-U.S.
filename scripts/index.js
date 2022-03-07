@@ -3,9 +3,7 @@
 /* ========================================================================== */
 
 import { initialCards as items } from "./cards.js";
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
-import * as func from "./utils.js";
+import * as utils from "./utils.js";
 
 /* ========================================================================== */
 /* =                             VARIABLES                                  = */
@@ -20,7 +18,6 @@ const closeProfileFormButton = document.querySelector(".popup__close");
 ///-------------------------------CARDS--------------------------------------///
 const openAddFormButton = document.querySelector(".profile__add-button");
 const closeAddFormButton = document.querySelector(".popup__close_el_new-place");
-const addNewCardPopup = document.querySelector(".popup_el_new-place");
 const addNewCardFormSubmit = document.querySelector(
     ".edit-form__save_el_new-place"
 );
@@ -32,16 +29,16 @@ const cardLink = document.querySelector("#link");
 ///--------------------------------------------------------------------------///
 
 ///-------------------------------POPUP--------------------------------------///
-///PopupList///
+
 const popupList = document.querySelectorAll(".popup");
+
 ///--------------------------------------------------------------------------///
 
 /* ========================================================================== */
 /* =                             CARDRENDER                                 = */
 /* ========================================================================== */
 items.forEach((item) => {
-    const card = new Card(item, "#card-template");
-    const cardElement = card.renderCard();
+    const cardElement = utils.createCard(item);
     cardList.append(cardElement);
 });
 ///--------------------------------------------------------------------------///
@@ -49,58 +46,56 @@ items.forEach((item) => {
 /* ========================================================================== */
 /* =                             EVENTLISTENERS                             = */
 /* ========================================================================== */
-editProfileForm.addEventListener("submit", func.handleProfileFormSubmit);
+editProfileForm.addEventListener("submit", utils.handleProfileFormSubmit);
 
 editProfileButton.addEventListener(
     "click",
-    func.editProfileButtonHandler,
-    // func.enableValidation(editProfileForm),
+    utils.openProfilePopup,
 );
-
-closeProfileFormButton.addEventListener("click", () => {
-    func.closePopup(func.editProfilePopup);
-    func.resetFormValidation(editProfileForm);
-    editProfileForm.reset();
-});
 
 addNewCardForm.addEventListener("submit", (evt) => {
     evt.preventDefault();
-    const newCard = new Card(
-        {
-            name: cardName.value,
-            link: cardLink.value,
-        },
-        "#card-template"
-    );
-    const newCardElement = newCard.renderCard();
-    cardList.prepend(newCardElement);
-    func.closePopup(addNewCardPopup);
+    const card = utils.createCard({
+        name: cardName.value,
+        link: cardLink.value,
+    });
+    cardList.prepend(card);
+    utils.closePopup(utils.addNewCardPopup);
     addNewCardForm.reset();
-});
-
-cardPreviewClose.addEventListener("click", () => {
-    func.closePopup(func.cardPreview);
 });
 
 openAddFormButton.addEventListener("click", () => {
-    func.openPopup(addNewCardPopup);
-    // func.enableValidation(addNewCardForm);
+    utils.openPopup(utils.addNewCardPopup);
+    utils.cardFormValidator.resetValidation();
     addNewCardForm.reset();
 });
 
-closeAddFormButton.addEventListener("click", () => {
-    func.closePopup(addNewCardPopup);
+// cardPreviewClose.addEventListener("click", () => {
+//     utils.closePopup(utils.cardPreview);
+// });
+// closeProfileFormButton.addEventListener("click", () => {
+//     utils.closePopup(utils.editProfilePopup);
+// });
+// closeAddFormButton.addEventListener("click", () => {
+//     utils.closePopup(utils.addNewCardPopup);
     
+// });
+///------------------------------------------------------------------------///
+
+///--------------------------POPUP CLOSE----------------------------------///
+popupList.forEach((popup) => {
+    popup.addEventListener("mousedown", (evt) => {
+        if (evt.target.classList.contains("popup_open")) {
+            utils.closePopup(popup);
+        }
+        if (evt.target.classList.contains("popup__close")) {
+            utils.closePopup(popup);
+    }
+});
 });
 ///------------------------------------------------------------------------///
 
-///--------------------------OVERLAYCLICK----------------------------------///
-popupList.forEach((popup) => {
-    popup.addEventListener("click", (evt) => {
-        if (evt.target.classList.contains("popup_open")) {
-            func.closePopup(evt.target);
-        }
-    });
-});
-///------------------------------------------------------------------------///
+///--------------------------VALIDATION------------------------------------///
+utils.profileFormValidator.enableValidation();
+utils.cardFormValidator.enableValidation();
 
