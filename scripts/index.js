@@ -29,9 +29,7 @@ const cardLink = document.querySelector("#link");
 ///--------------------------------------------------------------------------///
 
 ///-------------------------------POPUP--------------------------------------///
-
 const popupList = document.querySelectorAll(".popup");
-
 ///--------------------------------------------------------------------------///
 
 /* ========================================================================== */
@@ -69,17 +67,6 @@ openAddFormButton.addEventListener("click", () => {
     utils.cardFormValidator.resetValidation();
     addNewCardForm.reset();
 });
-
-// cardPreviewClose.addEventListener("click", () => {
-//     utils.closePopup(utils.cardPreview);
-// });
-// closeProfileFormButton.addEventListener("click", () => {
-//     utils.closePopup(utils.editProfilePopup);
-// });
-// closeAddFormButton.addEventListener("click", () => {
-//     utils.closePopup(utils.addNewCardPopup);
-    
-// });
 ///------------------------------------------------------------------------///
 
 ///--------------------------POPUP CLOSE----------------------------------///

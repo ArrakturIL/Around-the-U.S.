@@ -2,7 +2,7 @@
 /* =                             IMPORTS                                    = */
 /* ========================================================================== */
 
-import { formValidatorData as data } from "./utils.js";
+
 
 /* ========================================================================== */
 /* =                             IMPORTS                                    = */
@@ -49,8 +49,8 @@ export default class FormValidator {
             return !input.validity.valid;
         });
     }
-    _toggleButtonState(inputList) {
-        if (this._hasInvalidInput(inputList)) {
+    _toggleButtonState() {
+        if (this._hasInvalidInput()) {
             this._button.setAttribute("disabled", true);
             this._button.classList.add(this._inactiveButtonClass);
         } else {
@@ -58,14 +58,14 @@ export default class FormValidator {
             this._button.classList.remove(this._inactiveButtonClass);
         }
     }
-    _setEventListeners(formElement) {
+    _setEventListeners() {
         
-        this._toggleButtonState(this._button, this._inputList);
+        this._toggleButtonState();
 
         this._inputList.forEach((input) => {
             input.addEventListener("input", () => {
-                this._checkInputValidity(input, formElement);
-                this._toggleButtonState(this._button, this._inputList);
+                this._checkInputValidity(input);
+                this._toggleButtonState();
             });
         });
     }

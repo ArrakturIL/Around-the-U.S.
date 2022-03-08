@@ -24,8 +24,6 @@ export const formValidatorData = {
 /* =                             VARIABLES                                  = */
 /* ========================================================================== */
 
-
-
 ///------------------------------EXPORT VAR-----------------------------------///
 
 export const editProfilePopup = document.querySelector(".popup_el_profile");
