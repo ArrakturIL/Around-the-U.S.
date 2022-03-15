@@ -2,8 +2,7 @@
 /* =                             IMPORTS                                    = */
 /* ========================================================================== */
 
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
+import FormValidator from "../FormValidator.js";
 
 /* ========================================================================== */
 /* =                               DATA                                     = */
@@ -21,10 +20,31 @@ export const formValidatorData = {
 };
 
 /* ========================================================================== */
-/* =                             VARIABLES                                  = */
+/* =                            EXPORT VARIABLES                            = */
 /* ========================================================================== */
 
-///------------------------------EXPORT VAR-----------------------------------///
+///------------------------------PROFILE-------------------------------------///
+export const editProfileForm = document.querySelector(".edit-form");
+export const editProfileButton = document.querySelector(".profile__edit-button");
+export const closeProfileFormButton = document.querySelector(".popup__close");
+///--------------------------------------------------------------------------///
+
+///-------------------------------CARDS--------------------------------------///
+export const openAddFormButton = document.querySelector(".profile__add-button");
+export const closeAddFormButton = document.querySelector(".popup__close_el_new-place");
+export const addNewCardFormSubmit = document.querySelector(
+    ".edit-form__save_el_new-place"
+);
+export const addNewCardForm = document.querySelector(".edit-form_el_new-place");
+export const cardPreviewClose = document.querySelector(".popup__close_el_preview");
+export const cardList = document.querySelector(".elements");
+export const cardName = document.querySelector("#title");
+export const cardLink = document.querySelector("#link");
+///--------------------------------------------------------------------------///
+
+///-------------------------------POPUP--------------------------------------///
+export const popupList = document.querySelectorAll(".popup");
+///--------------------------------------------------------------------------///
 
 export const editProfilePopup = document.querySelector(".popup_el_profile");
 export const addNewCardPopup = document.querySelector(".popup_el_new-place");
@@ -48,50 +68,3 @@ export const cardFormValidator = new FormValidator(
     formValidatorData,
     addNewCardPopup
 );
-
-/* ========================================================================== */
-/* =                             FUNCTIONS                                  = */
-/* ========================================================================== */
-
-export function openPopup(popup) {
-    popup.classList.add("popup_open");
-    document.addEventListener("keydown", handleEscKey);
-}
-
-export function closePopup(popup) {
-    popup.classList.remove("popup_open");
-    document.removeEventListener("keydown", handleEscKey);
-}
-
-export function handleProfileFormSubmit(evt) {
-    evt.preventDefault();
-
-    const aboutValue = aboutInput.value;
-    const nameValue = nameInput.value;
-
-    profileName.textContent = nameValue;
-    profileAbout.textContent = aboutValue;
-
-    closePopup(editProfilePopup);
-}
-
-export function openProfilePopup(evt) {
-    evt.preventDefault();
-
-    nameInput.value = profileName.textContent;
-    aboutInput.value = profileAbout.textContent;
-    profileFormValidator.resetValidation();
-    openPopup(editProfilePopup);
-}
-
-export function handleEscKey(evt) {
-    if (evt.key === "Escape") {
-        closePopup(document.querySelector(".popup_open"));
-    }
-}
-
-export function createCard(item) {
-    const card = new Card(item, "#card-template");
-    const cardElement = card.renderCard();
-    return cardElement;
-}

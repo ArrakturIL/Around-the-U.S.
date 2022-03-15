@@ -1,0 +1,49 @@
+@import url(../vendor/fonts/fonts.css);
+@import url(../vendor/normalize.css);
+
+@import url(../styles/blocks/page/page.css);
+
+@import url(../styles/blocks/popup/popup.css);
+@import url(../styles/blocks/popup/_open/popup_open.css);
+@import url(../styles/blocks/popup/__container/popup__container.css);
+@import url(../styles/blocks/popup/__close/popup__close.css);
+@import url(../styles/blocks/popup/__container/_type_preview/popup__container_type_preview.css);
+@import url(../styles/blocks/popup/__image/popup__image.css);
+@import url(../styles/blocks/popup/__description/popup__description.css);
+
+@import url(../styles/blocks/edit-form/edit-form.css);
+@import url(../styles/blocks/edit-form/__label/edit-form__label.css);
+@import url(../styles/blocks/edit-form/__input/edit-form__input.css);
+@import url(../styles/blocks/edit-form/__heading/edit-form__heading.css);
+@import url(../styles/blocks/edit-form/__text-input/edit-form__text-input.css);
+@import url(../styles/blocks/edit-form/__save/edit-form__save.css);
+@import url(../styles/blocks/edit-form/__error/edit-form__error.css);
+@import url(../styles/blocks/edit-form/__error/_visible/edit-form__error_visible.css);
+@import url(../styles/blocks/edit-form/__save/_disabled/edit-form__save_disabled.css);
+@import url(../styles/blocks/edit-form/__text-input/_error/edit-form__text-input_type_error.css);
+
+@import url(../styles/blocks/content/content.css);
+
+@import url(../styles/blocks/header/header.css);
+@import url(../styles/blocks/header/__logo/header__logo.css);
+
+@import url(../styles/blocks/profile/profile.css);
+@import url(../styles/blocks/profile/__avatar/profile__avatar.css);
+@import url(../styles/blocks/profile/__info/profile__info.css);
+@import url(../styles/blocks/profile/__name/profile__name.css);
+@import url(../styles/blocks/profile/__about/profile__about.css);
+@import url(../styles/blocks/profile/__edit-button/profile__edit-button.css);
+@import url(../styles/blocks/profile/__add-button/profile__add-button.css);
+
+@import url(../styles/blocks/elements/elements.css);
+
+@import url(../styles/blocks/element/element.css);
+@import url(../styles/blocks/element/__post-img/element__post-img.css);
+@import url(../styles/blocks/element/__post-info/element__post-info.css);
+@import url(../styles/blocks/element/__post-name/element__post-name.css);
+@import url(../styles/blocks/element/__post-like/element__post-like.css);
+@import url(../styles/blocks/element/__post-like/_active/element__post-like_active.css);
+@import url(../styles/blocks/element/__delete/element__delete.css);
+
+@import url(../styles/blocks/footer/footer.css);
+@import url(../styles/blocks/footer/__copyright/footer__copyright.css);

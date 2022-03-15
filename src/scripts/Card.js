@@ -2,7 +2,8 @@
 /* =                             IMPORTS                                    = */
 /* ========================================================================== */
 
-import { cardPreview, popupImage, popupTitle, openPopup } from "./utils.js";
+import { cardPreview, popupImage, popupTitle} from "./utils/constans.js";
+import { openPopup } from "./utils/utils.js";
 
 /* ========================================================================== */
 /* =                             CARD CLASS                                 = */
