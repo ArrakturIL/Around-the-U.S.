@@ -2,7 +2,7 @@
 /* =                             IMPORTS                                    = */
 /* ========================================================================== */
 
-import { initialCards as items } from "../scripts/cards.js";
+
 import * as utils from "../scripts/utils/utils.js";
 import {
     editProfileForm,
@@ -15,16 +15,16 @@ import {
     popupList,
     profileFormValidator,
     cardFormValidator,
-    addNewCardPopup
+    addNewCardPopup,
+    cardsGallery
 } from "../scripts/utils/constans.js";
 
 /* ========================================================================== */
 /* =                             CARDRENDER                                 = */
 /* ========================================================================== */
-items.forEach((item) => {
-    const cardElement = utils.createCard(item);
-    cardList.append(cardElement);
-});
+
+cardsGallery.renderItems();
+
 ///--------------------------------------------------------------------------///
 
 /* ========================================================================== */

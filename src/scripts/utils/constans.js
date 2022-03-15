@@ -2,7 +2,11 @@
 /* =                             IMPORTS                                    = */
 /* ========================================================================== */
 
-import FormValidator from "../FormValidator.js";
+import FormValidator from "../components/FormValidator.js";
+import Section from '../components/Section.js';
+
+import { initialCards } from "../components/cards.js";
+import { createCard } from "./utils.js";
 
 /* ========================================================================== */
 /* =                               DATA                                     = */
@@ -68,3 +72,15 @@ export const cardFormValidator = new FormValidator(
     formValidatorData,
     addNewCardPopup
 );
+
+///----------------------------SECTION----------------------------///
+const cardListSelector = ".elements";
+export const cardsGallery = new Section({
+    items: initialCards,
+    renderer: (item) => {
+        cardsGallery.addItem(createCard({
+            name: item.name,
+            link: item.link,
+        }));
+    }
+}, cardListSelector);

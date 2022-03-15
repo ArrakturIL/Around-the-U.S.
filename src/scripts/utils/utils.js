@@ -2,7 +2,7 @@
 /* =                             IMPORTS                                    = */
 /* ========================================================================== */
 
-import Card from "../Card.js";
+import Card from "../components/Card.js";
 import {
     editProfilePopup,
     nameInput,
@@ -58,3 +58,4 @@ export function createCard(item) {
     const cardElement = card.renderCard();
     return cardElement;
 }
+
