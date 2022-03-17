@@ -2,8 +2,6 @@
 /* =                             IMPORTS                                    = */
 /* ========================================================================== */
 
-
-
 /* ========================================================================== */
 /* =                             IMPORTS                                    = */
 /* ========================================================================== */
@@ -21,18 +19,21 @@ export default class FormValidator {
         this._inputList = Array.from(
             formElement.querySelectorAll(this._inputSelector)
         );
-        this._button = 
-            formElement.querySelector(this._submitButtonSelector);
+        this._button = formElement.querySelector(this._submitButtonSelector);
     }
     //Private methods
     _showInputError(input) {
-        this._errorElement = this._formElement.querySelector(`#${input.id}-error`);
+        this._errorElement = this._formElement.querySelector(
+            `#${input.id}-error`
+        );
         this._errorElement.textContent = input.validationMessage;
         input.classList.add(this._inputErrorClass);
         this._errorElement.classList.add(this._errorClass);
     }
     _hideInputError(input) {
-        this._errorElement = this._formElement.querySelector(`#${input.id}-error`);
+        this._errorElement = this._formElement.querySelector(
+            `#${input.id}-error`
+        );
         this._errorElement.textContent = "";
         input.classList.remove(this._inputErrorClass);
         this._errorElement.classList.remove(this._errorClass);
@@ -59,7 +60,6 @@ export default class FormValidator {
         }
     }
     _setEventListeners() {
-        
         this._toggleButtonState();
 
         this._inputList.forEach((input) => {
@@ -77,10 +77,10 @@ export default class FormValidator {
     }
 
     resetValidation() {
-       this._toggleButtonState();
+        this._toggleButtonState();
 
-       this._inputList.forEach((input) => {
-              this._hideInputError(input);
-         });
+        this._inputList.forEach((input) => {
+            this._hideInputError(input);
+        });
     }
 }

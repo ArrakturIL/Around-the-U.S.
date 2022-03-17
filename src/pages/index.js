@@ -2,21 +2,17 @@
 /* =                             IMPORTS                                    = */
 /* ========================================================================== */
 
-
 import * as utils from "../scripts/utils/utils.js";
 import {
-    editProfileForm,
-    editProfileButton,
-    openAddFormButton,
-    addNewCardForm,
-    cardList,
-    cardName,
-    cardLink,
-    popupList,
-    profileFormValidator,
+    formSettings,
     cardFormValidator,
+    cardsGallery,
+    profileFormValidator,
+    buttonSettings,
+    popupImageSettings,
+    editProfilePopup,
     addNewCardPopup,
-    cardsGallery
+    userInfo,
 } from "../scripts/utils/constans.js";
 
 /* ========================================================================== */
@@ -30,41 +26,19 @@ cardsGallery.renderItems();
 /* ========================================================================== */
 /* =                             EVENTLISTENERS                             = */
 /* ========================================================================== */
-editProfileForm.addEventListener("submit", utils.handleProfileFormSubmit);
+editProfilePopup.setEventListeners();
+addNewCardPopup.setEventListeners();
 
-editProfileButton.addEventListener("click", utils.openProfilePopup);
-
-addNewCardForm.addEventListener("submit", (evt) => {
-    evt.preventDefault();
-    const card = utils.createCard({
-        name: cardName.value,
-        link: cardLink.value,
-    });
-    cardList.prepend(card);
-    utils.closePopup(addNewCardPopup);
-    addNewCardForm.reset();
+buttonSettings.editProfileButtonSelector.addEventListener("click", () => {
+    editProfilePopup.open();
+    const{name, about} = userInfo.getUserInfo();
+    formSettings.profileForm.name.value = name;
+    formSettings.profileForm.about.value = about;
+    profileFormValidator.enableValidation();
 });
 
-openAddFormButton.addEventListener("click", () => {
-    utils.openPopup(addNewCardPopup);
-    cardFormValidator.resetValidation();
-    addNewCardForm.reset();
+buttonSettings.addNewCardButtonSelector.addEventListener("click", () => {
+    addNewCardPopup.open();
+    cardFormValidator.enableValidation();
 });
-///------------------------------------------------------------------------///
 
-///--------------------------POPUP CLOSE----------------------------------///
-popupList.forEach((popup) => {
-    popup.addEventListener("mousedown", (evt) => {
-        if (evt.target.classList.contains("popup_open")) {
-            utils.closePopup(popup);
-        }
-        if (evt.target.classList.contains("popup__close")) {
-            utils.closePopup(popup);
-        }
-    });
-});
-///------------------------------------------------------------------------///
-
-///--------------------------VALIDATION------------------------------------///
-profileFormValidator.enableValidation();
-cardFormValidator.enableValidation();

@@ -2,9 +2,6 @@
 /* =                             IMPORTS                                    = */
 /* ========================================================================== */
 
-import { cardPreview, popupImage, popupTitle} from "../utils/constans.js";
-import { openPopup } from "../utils/utils.js";
-
 /* ========================================================================== */
 /* =                             CARD CLASS                                 = */
 /* ========================================================================== */
@@ -45,12 +42,12 @@ export default class Card {
         this._likeButton.classList.toggle("element__post-like_active");
     }
 
-    _openImagePreview() {
-        openPopup(cardPreview);
-        popupImage.src = this._img;
-        popupTitle.textContent = this._title;
-        popupImage.alt = this._title;
-    }
+    // _openImagePreview() {
+    //     openPopup(cardPreview);
+    //     popupImage.src = this._img;
+    //     popupTitle.textContent = this._title;
+    //     popupImage.alt = this._title;
+    // }
 
     _setEventListeners() {
         this._deleteButton.addEventListener("click", () => {
