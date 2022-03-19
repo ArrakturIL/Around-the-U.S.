@@ -2,19 +2,18 @@
 /* =                             IMPORTS                                    = */
 /* ========================================================================== */
 
-import FormValidator from "../components/FormValidator.js";
+// import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
-
 import { initialCards } from "../components/cards.js";
-import { createCard} from "./utils.js";
+import { createCard } from "./utils.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
+import Card from "../components/Card.js";
 /* ========================================================================== */
 /* =                               settings                                 = */
 /* ========================================================================== */
 
-///------------------------------VALIDATOR-----------------------------------///
 
 export const formValidatorData = {
     formSelector: ".edit-form",
@@ -26,7 +25,7 @@ export const formValidatorData = {
 };
 
 export const elementsSettings = {
-    popupSelector: ".popup",
+    mainPopupSelector: ".popup",
     cardListSelector: ".elements",
     editProfileSelector: ".popup_el_profile",
     addNewCardSelector: ".popup_el_new-place",
@@ -50,76 +49,92 @@ export const buttonSettings = {
 export const popupImageSettings = {
     popupCardPreviewSelector: ".popup_el_preview",
     popupCardImageSelector: ".popup__image",
-    popupCardTitleSelector: ".popup__description",
+    popupCardDescriptionSelector: ".popup__description",
 };
 /* ========================================================================== */
 /* =                            EXPORT VARIABLES                            = */
 /* ========================================================================== */
 ///------------------------------BUTTONS-------------------------------------///
-// export const editProfileButton = document.querySelector(
-//     ".profile__edit-button"
-// );
-// export const closeProfileFormButton = document.querySelector(".popup__close");
-// export const openAddFormButton = document.querySelector(".profile__add-button");
-// export const closeAddFormButton = document.querySelector(
-//     ".popup__close_el_new-place"
-// );
-// export const addNewCardFormSubmit = document.querySelector(
-//     ".edit-form__save_el_new-place"
-// );
-// export const editformSubmit = document.querySelector(
-//     ".edit-form__save_el_profile"
-// );
-// export const cardPreviewClose = document.querySelector(
-//     ".popup__close_el_preview"
-// );
-// export const closeButton = ".popup__close";
-
-// ///------------------------------PROFILE-------------------------------------///
-// export const editProfileForm = document.querySelector(".edit-form");
+export const editProfileButton = document.querySelector(
+    ".profile__edit-button"
+);
+export const closeProfileFormButton = document.querySelector(".popup__close");
+export const openAddFormButton = document.querySelector(".profile__add-button");
+export const closeAddFormButton = document.querySelector(
+    ".popup__close_el_new-place"
+);
+export const addNewCardFormSubmit = document.querySelector(
+    ".edit-form__save_el_new-place"
+);
+export const editformSubmit = document.querySelector(
+    ".edit-form__save_el_profile"
+);
+export const cardPreviewClose = document.querySelector(
+    ".popup__close_el_preview"
+);
+export const closeButton = ".popup__close";
+export const editForm = document.querySelector(".edit-form");
+///------------------------------PROFILE-------------------------------------///
+export const editProfileForm = document.querySelector(".edit-form_el_profile");
 // ///--------------------------------------------------------------------------///
 
 // ///-------------------------------CARDS--------------------------------------///
-// export const addNewCardForm = document.querySelector(".edit-form_el_new-place");
-// export const cardList = document.querySelector(".elements");
-// export const cardName = document.querySelector("#title");
-// export const cardLink = document.querySelector("#link");
+export const addNewCardForm = document.querySelector(".edit-form_el_new-place");
+export const cardList = document.querySelector(".elements");
+export const cardName = document.querySelector("#title");
+export const cardLink = document.querySelector("#link");
 // ///--------------------------------------------------------------------------///
 
 // ///-------------------------------POPUP--------------------------------------///
-// export const popupList = document.querySelectorAll(".popup");
+export const popupList = document.querySelectorAll(".popup");
 // ///--------------------------------------------------------------------------///
 
-// export const editProfilePopup = document.querySelector(".popup_el_profile");
-// export const addNewCardPopup = document.querySelector(".popup_el_new-place");
+export const editProfilePopup = document.querySelector(".popup_el_profile");
+export const addNewCardPopup = document.querySelector(".popup_el_new-place");
 
-// export const nameInput = document.querySelector("#name");
-// export const aboutInput = document.querySelector("#about");
-// export const profileName = document.querySelector(".profile__name");
-// export const profileAbout = document.querySelector(".profile__about");
+export const nameInput = document.querySelector("#name");
+export const aboutInput = document.querySelector("#about");
+export const profileName = document.querySelector(".profile__name");
+export const profileAbout = document.querySelector(".profile__about");
 
-// export const cardPreview = document.querySelector(".popup_el_preview");
-// export const popupImage = cardPreview.querySelector(".popup__image");
-// export const popupTitle = cardPreview.querySelector(".popup__description");
+export const cardPreview = document.querySelector(".popup_el_preview");
+export const popupImage = cardPreview.querySelector(".popup__image");
+export const popupTitle = cardPreview.querySelector(".popup__description");
+
+//==============================================================================//
 
 ///----------------------------EXPORT FORMVALIDATOR----------------------------///
 
-export const profileFormValidator = new FormValidator(
-    formValidatorData,
-    elementsSettings.editProfileSelector
-);
-export const cardFormValidator = new FormValidator(
-    formValidatorData,
-    elementsSettings.addNewCardSelector
-);
+// export const profileFormValidator = new FormValidator(
+//     editProfilePopup,
+//     formValidatorData,
+
+// );
+// export const cardFormValidator = new FormValidator(
+//     addNewCardPopup,
+//     formValidatorData,
+
+// );
 
 ///----------------------------USER INFO----------------------------------///
 export const userInfo = new UserInfo({
-    nameSelector: formSettings.profileNameSelector,
-    aboutSelector: formSettings.profileAboutSelector,
+    nameSelector: ".profile__name",
+    aboutSelector: ".profile__about",
 });
 
-///----------------------------SECTION----------------------------///
+///----------------------------CREATE CARD----------------------------------///
+
+// export const createCardElement = (item) => {
+//     const card = new Card( {
+//         data: item,
+//         handleCardClick: () => {
+//             popupImage.src = item.link;
+//             popupTitle.textContent = item.name;
+//             popupImage.alt = item.name;
+
+
+
+///------------------------------SECTION------------------------------------///
 
 export const cardsGallery = new Section(
     {
@@ -135,28 +150,38 @@ export const cardsGallery = new Section(
     },
     elementsSettings.cardListSelector
 );
+cardsGallery.renderItems();
 
 ///----------------------------POPUP FROM PROFILE----------------------------///
-export const editProfilePopup = new PopupWithForm(
-    elementsSettings.editProfileSelector, (evt) => {
-        evt.preventDefault();
-        const{name, about} = editProfilePopup.getInputValues();
-        userInfo.setUserInfo({ name, about });
-        editProfilePopup.close();
-    });
-    
+export const editProfile = new PopupWithForm( elementsSettings.editProfileSelector , (evt) => {
+    evt.preventDefault();
+    const { name, about } = editProfile.getInputValues();
+    userInfo.setUserInfo({ name, about });
+    editProfile.close();
+});
+   
 
-///----------------------------POPUP FROM ADD NEW CARD----------------------------///
-export const addNewCardPopup = new PopupWithForm(
-    elementsSettings.addNewCardSelector, (evt) => {
+
+// ///----------------------------POPUP FROM ADD NEW CARD----------------------------///
+export const addNewCard = new PopupWithForm(
+    elementsSettings.addNewCardSelector,
+    (evt) => {
         evt.preventDefault();
-        const{name, link} = addNewCardPopup.getInputValues();
+        const { title, link } = addNewCard.getInputValues();
         cardsGallery.addItem(
             createCard({
-                name,
+                name: title,
                 link,
             })
         );
-        addNewCardPopup.close();
+        addNewCard.close();
     });
-    addNewCardPopup.setEventListeners();
+
+
+///----------------------------POPUP WITH IMAGE----------------------------///
+
+export const imagePreview = new PopupWithImage({
+    popupSelector: popupImageSettings.popupCardPreviewSelector, 
+    imageSelector: popupImageSettings.popupCardImageSelector, 
+    descriptionSelector: popupImageSettings.popupCardDescriptionSelector}
+);

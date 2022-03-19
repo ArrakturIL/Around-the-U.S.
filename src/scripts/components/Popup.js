@@ -1,5 +1,6 @@
 // import { closeButton } from "../utils/constans";
 
+
 export default class Popup {
     constructor(popupSelector) {
         this._popupSelector = popupSelector;
@@ -14,17 +15,18 @@ export default class Popup {
         this._popup.classList.remove("popup_open");
         this.removeEventListeners();
     }
-    _handleEscKey(evt) {
+    _handleEscKey = (evt) => {
         if (evt.key === "Escape") {
             this.close();
         }
     }
-    _handlerClickClose(evt) {
-        if (evt.target.classList.contains('popup_open') || evt.target.classList.contains('popup__close')) {
+    _handlerClickClose = (evt) => {
+        if (evt.target.classList.contains("popup_open") || evt.target.classList.contains("popup__close")) {
             this.close();
         }
-        
     }
+        
+    
     setEventListeners() {
         this._popup.addEventListener("click", this._handlerClickClose);
         document.addEventListener("keydown", this._handleEscKey);

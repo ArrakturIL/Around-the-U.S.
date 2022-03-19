@@ -1,16 +1,18 @@
+import { formSettings } from "../utils/constans.js";
+
 export default class UserInfo {
-    constructor({ nameSelector, aboutSelector }) {
-        this._nameSelector = nameSelector;
-        this._aboutSelector = aboutSelector;
-        this._nameElement = document.querySelector(nameSelector);
-        this._aboutElement = document.querySelector(aboutSelector);
+    constructor({ name, about }) {
+        this._nameSelector = name;
+        this._aboutSelector = about;
+        this._nameElement = document.querySelector(formSettings.profileNameSelector);
+        this._aboutElement = document.querySelector(formSettings.profileAboutSelector);
     }
 
     getUserInfo() {
-        return {
-            name: this._nameElement.textContent,
-            about: this._aboutElement.textContent,
-        };
+     this._info = {}
+        this._info.name = this._nameElement.textContent;
+        this._info.about = this._aboutElement.textContent;
+        return this._info;
     }
 
     setUserInfo({ name, about }) {

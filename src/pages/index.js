@@ -2,43 +2,53 @@
 /* =                             IMPORTS                                    = */
 /* ========================================================================== */
 
-import * as utils from "../scripts/utils/utils.js";
 import {
-    formSettings,
-    cardFormValidator,
+//     profileFormValidator,
+//     cardFormValidator,
     cardsGallery,
-    profileFormValidator,
-    buttonSettings,
-    popupImageSettings,
-    editProfilePopup,
-    addNewCardPopup,
     userInfo,
+    editProfileButton,
+    openAddFormButton,
+    addNewCardForm,
+    addNewCard,
+    nameInput,
+    aboutInput,
+    editProfile,
 } from "../scripts/utils/constans.js";
 
-/* ========================================================================== */
-/* =                             CARDRENDER                                 = */
-/* ========================================================================== */
 
-cardsGallery.renderItems();
 
-///--------------------------------------------------------------------------///
 
 /* ========================================================================== */
 /* =                             EVENTLISTENERS                             = */
 /* ========================================================================== */
-editProfilePopup.setEventListeners();
-addNewCardPopup.setEventListeners();
 
-buttonSettings.editProfileButtonSelector.addEventListener("click", () => {
-    editProfilePopup.open();
-    const{name, about} = userInfo.getUserInfo();
-    formSettings.profileForm.name.value = name;
-    formSettings.profileForm.about.value = about;
-    profileFormValidator.enableValidation();
+editProfileButton.addEventListener("click", () => {
+    editProfile.open();
+    nameInput.value = userInfo.getUserInfo().name;
+    aboutInput.value = userInfo.getUserInfo().about;
 });
 
-buttonSettings.addNewCardButtonSelector.addEventListener("click", () => {
-    addNewCardPopup.open();
-    cardFormValidator.enableValidation();
+
+openAddFormButton.addEventListener("click", () => {
+    addNewCard.open();
 });
 
+editProfile.setEventListeners();
+addNewCard.setEventListeners();
+
+// profileFormValidator.enableValidation();
+// cardFormValidator.enableValidation();
+
+///--------------------------POPUP CLOSE----------------------------------///
+// popupList.forEach((popup) => {
+//     popup.addEventListener("mousedown", (evt) => {
+//         if (evt.target.classList.contains("popup_open")) {
+//             utils.closePopup(popup);
+//         }
+//         if (evt.target.classList.contains("popup__close")) {
+//             utils.closePopup(popup);
+//     }
+// });
+// });
+///------------------------------------------------------------------------///

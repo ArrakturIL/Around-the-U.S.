@@ -7,10 +7,11 @@
 /* ========================================================================== */
 
 export default class Card {
-    constructor(data, cardSelector) {
+    constructor(data, cardSelector, handleCardClick) {
         this._title = data.name;
         this._img = data.link;
         this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
     }
     _getTemplate() {
         const cardElement = document
@@ -57,7 +58,7 @@ export default class Card {
             this._likeCard();
         });
         this._cardImg.addEventListener("click", () => {
-            this._openImagePreview();
+            this._handleCardClick();
         });
     }
 }

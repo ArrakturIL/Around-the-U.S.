@@ -3,16 +3,16 @@
 /* ========================================================================== */
 
 import Card from "../components/Card.js";
-import {
-    formSettings,
-    buttonSettings,
-    popupImageSettings,
-    profileFormValidator,
-    elementsSettings,
-} from "./constans.js";
-import { userInfo } from "./constans.js";
-import Popup from "../components/Popup.js";
-import PopupWithForm from "../components/PopupWithForm.js";
+// import {
+//     formSettings,
+//     buttonSettings,
+//     popupImageSettings,
+//     profileFormValidator,
+//     elementsSettings,
+// } from "./constans.js";
+// import { userInfo } from "./constans.js";
+// import Popup from "../components/Popup.js";
+// import PopupWithForm from "../components/PopupWithForm.js";
 /* ========================================================================== */
 /* =                             FUNCTIONS                                  = */
 /* ========================================================================== */
