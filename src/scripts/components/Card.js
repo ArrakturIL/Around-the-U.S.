@@ -7,9 +7,9 @@
 /* ========================================================================== */
 
 export default class Card {
-    constructor(data, cardSelector, handleCardClick) {
-        this._title = data.name;
-        this._img = data.link;
+    constructor({name, link}, cardSelector, handleCardClick) {
+        this._title = name;
+        this._img = link;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
     }
@@ -20,7 +20,7 @@ export default class Card {
             .cloneNode(true);
         return cardElement;
     }
-    renderCard() {
+    generateCard() {
         this._card = this._getTemplate();
         this._cardTitle = this._card.querySelector(".element__post-name");
         this._cardImg = this._card.querySelector(".element__post-img");
@@ -42,13 +42,6 @@ export default class Card {
     _likeCard() {
         this._likeButton.classList.toggle("element__post-like_active");
     }
-
-    // _openImagePreview() {
-    //     openPopup(cardPreview);
-    //     popupImage.src = this._img;
-    //     popupTitle.textContent = this._title;
-    //     popupImage.alt = this._title;
-    // }
 
     _setEventListeners() {
         this._deleteButton.addEventListener("click", () => {

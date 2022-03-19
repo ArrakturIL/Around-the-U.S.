@@ -34,11 +34,11 @@ import Card from "../components/Card.js";
 //     }
 // }
 
-export function createCard(item) {
-    const card = new Card(item, "#card-template");
-    const cardElement = card.renderCard();
-    return cardElement;
-}
+// export function createCard(item) {
+//     const card = new Card(item, "#card-template");
+//     const cardElement = card.renderCard();
+//     return cardElement;
+// }
 
 
 

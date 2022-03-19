@@ -5,7 +5,7 @@
 // import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import { initialCards } from "../components/cards.js";
-import { createCard } from "./utils.js";
+// import { createCard } from "./utils.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
@@ -13,7 +13,6 @@ import Card from "../components/Card.js";
 /* ========================================================================== */
 /* =                               settings                                 = */
 /* ========================================================================== */
-
 
 export const formValidatorData = {
     formSelector: ".edit-form",
@@ -29,6 +28,8 @@ export const elementsSettings = {
     cardListSelector: ".elements",
     editProfileSelector: ".popup_el_profile",
     addNewCardSelector: ".popup_el_new-place",
+    cardTemplateSelector: "#card-template",
+    cardSelector: ".element",
 };
 
 export const formSettings = {
@@ -47,9 +48,9 @@ export const buttonSettings = {
     closeButtonSelector: ".popup__close",
 };
 export const popupImageSettings = {
-    popupCardPreviewSelector: ".popup_el_preview",
-    popupCardImageSelector: ".popup__image",
-    popupCardDescriptionSelector: ".popup__description",
+    popupPreviewSelector: ".popup_el_preview",
+    popupImageSelector: ".popup__image",
+    popupImageTitleSelector: ".popup__description",
 };
 /* ========================================================================== */
 /* =                            EXPORT VARIABLES                            = */
@@ -121,16 +122,24 @@ export const userInfo = new UserInfo({
     nameSelector: ".profile__name",
     aboutSelector: ".profile__about",
 });
+///----------------------------POPUP WITH IMAGE----------------------------///
 
-///----------------------------CREATE CARD----------------------------------///
-
-// export const createCardElement = (item) => {
-//     const card = new Card( {
-//         data: item,
-//         handleCardClick: () => {
-//             popupImage.src = item.link;
-//             popupTitle.textContent = item.name;
-//             popupImage.alt = item.name;
+export const imagePreview = new PopupWithImage({
+    popupSelector: ".popup_el_preview",
+    imageSelector: ".popup__image",
+    imageTitleSelector: ".popup__description",
+});
+///----------------------------CREATE CARD with POPUP WITH IMAGE----------------------------------///
+export const createCard = ({name, link}) => {
+    const card = new Card({
+        name,
+        link
+    }, '#card-template', () => {
+        imagePreview.open(name ,link);
+    });
+    const cardElement = card.generateCard();
+    return cardElement;
+};
 
 
 
@@ -153,14 +162,15 @@ export const cardsGallery = new Section(
 cardsGallery.renderItems();
 
 ///----------------------------POPUP FROM PROFILE----------------------------///
-export const editProfile = new PopupWithForm( elementsSettings.editProfileSelector , (evt) => {
-    evt.preventDefault();
-    const { name, about } = editProfile.getInputValues();
-    userInfo.setUserInfo({ name, about });
-    editProfile.close();
-});
-   
-
+export const editProfile = new PopupWithForm(
+    elementsSettings.editProfileSelector,
+    (evt) => {
+        evt.preventDefault();
+        const { name, about } = editProfile.getInputValues();
+        userInfo.setUserInfo({ name, about });
+        editProfile.close();
+    }
+);
 
 // ///----------------------------POPUP FROM ADD NEW CARD----------------------------///
 export const addNewCard = new PopupWithForm(
@@ -175,13 +185,5 @@ export const addNewCard = new PopupWithForm(
             })
         );
         addNewCard.close();
-    });
-
-
-///----------------------------POPUP WITH IMAGE----------------------------///
-
-export const imagePreview = new PopupWithImage({
-    popupSelector: popupImageSettings.popupCardPreviewSelector, 
-    imageSelector: popupImageSettings.popupCardImageSelector, 
-    descriptionSelector: popupImageSettings.popupCardDescriptionSelector}
+    }
 );
