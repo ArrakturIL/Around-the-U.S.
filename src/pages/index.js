@@ -14,6 +14,8 @@ import {
     nameInput,
     aboutInput,
 } from "../scripts/utils/settings.js";
+import "./index.css";
+
 
 /* ========================================================================== */
 /* =                             EVENTLISTENERS                             = */
