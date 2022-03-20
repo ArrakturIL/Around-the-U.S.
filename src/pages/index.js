@@ -1,23 +1,19 @@
 /* ========================================================================== */
 /* =                             IMPORTS                                    = */
 /* ========================================================================== */
-
 import {
-//     profileFormValidator,
-//     cardFormValidator,
-    cardsGallery,
     userInfo,
-    editProfileButton,
-    openAddFormButton,
-    addNewCardForm,
+    profileFormValidator,
+    cardFormValidator,
     addNewCard,
-    nameInput,
-    aboutInput,
     editProfile,
 } from "../scripts/utils/constans.js";
-
-
-
+import {
+    editProfileButton,
+    openAddFormButton,
+    nameInput,
+    aboutInput,
+} from "../scripts/utils/settings.js";
 
 /* ========================================================================== */
 /* =                             EVENTLISTENERS                             = */
@@ -27,28 +23,14 @@ editProfileButton.addEventListener("click", () => {
     editProfile.open();
     nameInput.value = userInfo.getUserInfo().name;
     aboutInput.value = userInfo.getUserInfo().about;
+    profileFormValidator.resetValidation();
 });
 
-
 openAddFormButton.addEventListener("click", () => {
+    cardFormValidator.resetValidation();
     addNewCard.open();
 });
 
-editProfile.setEventListeners();
-addNewCard.setEventListeners();
 
-// profileFormValidator.enableValidation();
-// cardFormValidator.enableValidation();
-
-///--------------------------POPUP CLOSE----------------------------------///
-// popupList.forEach((popup) => {
-//     popup.addEventListener("mousedown", (evt) => {
-//         if (evt.target.classList.contains("popup_open")) {
-//             utils.closePopup(popup);
-//         }
-//         if (evt.target.classList.contains("popup__close")) {
-//             utils.closePopup(popup);
-//     }
-// });
-// });
-///------------------------------------------------------------------------///
+profileFormValidator.enableValidation();
+cardFormValidator.enableValidation();

@@ -1,5 +1,3 @@
-// import { closeButton } from "../utils/constans";
-
 
 export default class Popup {
     constructor(popupSelector) {

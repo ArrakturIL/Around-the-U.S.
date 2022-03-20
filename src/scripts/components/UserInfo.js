@@ -1,4 +1,4 @@
-import { formSettings } from "../utils/constans.js";
+import { formSettings } from "../utils/settings.js";
 
 export default class UserInfo {
     constructor({ name, about }) {
