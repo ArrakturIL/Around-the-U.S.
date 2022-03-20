@@ -1,6 +1,6 @@
 # Project 4: Around The U.S.
 
-![Page Logo](images/icon.svg) 
+![Page Logo](src/images/icon.svg) 
 
 ***
 
