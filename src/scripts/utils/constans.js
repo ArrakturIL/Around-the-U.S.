@@ -19,18 +19,16 @@ import {
 } from "../utils/settings.js";
 import logoSRC from "../../images/logo.svg";
 import avatarSRC from "../../images/avatar.jpg";
-import iconSRC from "../../images/icon.svg";
+
+
 
 /* ========================================================================== */
 /* =                               IMAGES                                   = */
 /* ========================================================================== */
-const pageIcon = document.querySelector("#icon");
-pageIcon.src = iconSRC;
 const pageLogo = document.querySelector("#logo");
 pageLogo.src = logoSRC;
 const pageAvatar = document.querySelector("#avatar");
 pageAvatar.src = avatarSRC;
-
 /* ========================================================================== */
 /* =                               SETTINGS                                 = */
 /* ========================================================================== */
