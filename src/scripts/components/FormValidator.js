@@ -2,8 +2,6 @@
 /* =                             IMPORTS                                    = */
 /* ========================================================================== */
 
-
-
 export default class FormValidator {
     constructor(data, formElement) {
         this._formElement = formElement;
@@ -13,11 +11,14 @@ export default class FormValidator {
         this._inactiveButtonClass = data.inactiveButtonClass;
         this._inputErrorClass = data.inputErrorClass;
         this._errorClass = data.errorClass;
-    
-        this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector)
+
+        this._inputList = Array.from([
+            ...this._formElement.querySelectorAll(this._inputSelector),
+        ]);
+
+        this._button = this._formElement.querySelector(
+            this._submitButtonSelector
         );
-        
-        this._button = this._formElement.querySelector(this._submitButtonSelector);
     }
     //Private methods
     _showInputError(input) {
@@ -44,9 +45,7 @@ export default class FormValidator {
         }
     }
     _hasInvalidInput() {
-        return this._inputList.some((input) => {
-            return !input.validity.valid;
-        });
+        return this._inputList.some((input) => !input.validity.valid);
     }
     _toggleButtonState() {
         if (this._hasInvalidInput()) {
