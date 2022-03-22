@@ -1,13 +1,13 @@
 import { formSettings } from "../utils/settings.js";
 
 export default class UserInfo {
-    constructor({nameSelector,aboutSelector}) {
+    constructor({ nameSelector, aboutSelector }) {
         this._nameElement = document.querySelector(nameSelector);
         this._aboutElement = document.querySelector(aboutSelector);
     }
 
     getUserInfo() {
-     const info = {}
+        const info = {};
         info.name = this._nameElement.textContent;
         info.about = this._aboutElement.textContent;
         return info;
