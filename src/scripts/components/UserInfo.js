@@ -1,9 +1,10 @@
 import { formSettings } from "../utils/settings.js";
 
 export default class UserInfo {
-    constructor({ nameSelector, aboutSelector }) {
+    constructor({ nameSelector, aboutSelector, avatarSelector }) {
         this._nameElement = document.querySelector(nameSelector);
         this._aboutElement = document.querySelector(aboutSelector);
+        this._avatarElement = document.querySelector(avatarSelector);
     }
 
     getUserInfo() {
@@ -13,8 +14,14 @@ export default class UserInfo {
         return info;
     }
 
-    setUserInfo({ name, about }) {
+    setUserInfo({ name, about, id }) {
         this._nameElement.textContent = name;
         this._aboutElement.textContent = about;
+        this._userId = id;
+    }
+    getUserId = () => this._userId;
+
+    setUserAvatar({ avatar }) {
+        this._avatarElement.style.backgroundImage = `url(${avatar})`;
     }
 }

@@ -25,6 +25,7 @@ export const formSettings = {
     aboutInputSelector: "#about",
     addFormSelector: ".edit-form_el_new-place",
     profileFormSelector: ".edit-form_el_profile",
+    profileAvatarSelector: ".profile__avatar",
 };
 export const buttonSettings = {
     addNewCardButtonSelector: ".profile__add-button",
@@ -48,6 +49,7 @@ export const editProfilePopup = document.querySelector(".popup_el_profile");
 export const addNewCardPopup = document.querySelector(".popup_el_new-place");
 export const nameInput = document.querySelector("#name");
 export const aboutInput = document.querySelector("#about");
+export const saveProfileButton = document.querySelector(".edit-form__save_el_profile");
 //==============================================================================//
 
 

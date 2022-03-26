@@ -1,7 +1,7 @@
 /* ========================================================================== */
 /* =                             IMPORTS                                    = */
 /* ========================================================================== */
-
+import Api from "../scripts/utils/Api.js";
 import FormValidator from "../scripts/components/FormValidator.js";
 import Section from "../scripts/components/Section.js";
 import { initialCards } from "../scripts/utils/cards.js";
@@ -20,10 +20,30 @@ import {
     openAddFormButton,
     nameInput,
     aboutInput,
+    saveProfileButton,
 } from "../scripts/utils/settings.js";
 import logoSRC from "../images/logo.svg";
 // import avatarSRC from "../images/avatar.jpg";
 import "./index.css";
+
+/* ========================================================================== */
+/* =                               API                                      = */
+/* ========================================================================== */
+
+const api = new Api(
+    "https://around.nomoreparties.co/v1/group-12/",
+    "32f9436c-0893-4974-9272-aec5c5f4dcc9"
+);
+api.init()
+    .then(([cards, user]) => {
+        userInfo.setUserInfo(user);
+        userInfo.setUserAvatar(user);
+        cardsGallery.setItems(cards);
+        cardsGallery.renderItems();
+    })
+    .catch((err) => {
+        console.log(`Error.....: ${err}`);
+    });
 
 /* ========================================================================== */
 /* =                               IMAGES                                   = */
@@ -44,16 +64,28 @@ export function fillProfileForm() {
 }
 
 ///----------------------------CREATE CARD with POPUP WITH IMAGE----------------------------------///
-export const createCard = ({ name, link }) => {
+export const createCard = ({
+    name,
+    link,
+    id,
+    isOwner,
+    likeCount,
+    likedByOwner,
+}) => {
     const card = new Card(
         {
             name,
             link,
+            id,
+            isOwner,
+            likeCount,
+            likedByOwner,
         },
         "#card-template",
         () => {
             imagePreview.open(name, link);
-        }
+        },
+        ".element__like-count"
     );
     const cardElement = card.generateCard();
     return cardElement;
@@ -78,6 +110,7 @@ export const cardFormValidator = new FormValidator(
 export const userInfo = new UserInfo({
     nameSelector: formSettings.profileNameSelector,
     aboutSelector: formSettings.profileAboutSelector,
+    avatarSelector: formSettings.profileAvatarSelector,
 });
 ///----------------------------POPUP WITH IMAGE----------------------------///
 
@@ -89,33 +122,47 @@ export const imagePreview = new PopupWithImage({
 
 ///------------------------------SECTION------------------------------------///
 
-export const cardsGallery = new Section(
+const cardsGallery = new Section(
     {
-        items: initialCards,
         renderer: (item) => {
             cardsGallery.addItem(
                 createCard({
                     name: item.name,
                     link: item.link,
+                    id: item.id,
+                    isOwner: item.owner._id === userInfo.getUserId(),
+                    likeCount: item.likes.length,
+                    likedByOwner: item.likes.some(
+                        (like) => like._id === userInfo.getUserId()
+                    ),
                 })
             );
         },
     },
     elementsSettings.cardListSelector
 );
-cardsGallery.renderItems();
 
 ///----------------------------POPUP FROM PROFILE----------------------------///
+
 export const profilePopup = new PopupWithForm(
     elementsSettings.editProfileSelector,
     (evt) => {
         evt.preventDefault();
+        saveProfileButton.textContent = "Saving...";
         const { name, about } = profilePopup.getInputValues();
-        userInfo.setUserInfo({ name, about });
-        profilePopup.close();
+        api.updateUserInfo({ name, about })
+            .then(() => {
+                userInfo.setUserInfo({ name, about });
+                profilePopup.close();
+            })
+            .catch((err) => {
+                console.log(`Error.....: ${err}`);
+            })
+            .finally(() => {
+                saveProfileButton.textContent = "Save";
+            });
     }
 );
-
 // ///----------------------------POPUP FROM ADD NEW CARD----------------------------///
 export const cardPopup = new PopupWithForm(
     elementsSettings.addNewCardSelector,
@@ -131,7 +178,6 @@ export const cardPopup = new PopupWithForm(
         cardPopup.close();
     }
 );
-
 
 /* ========================================================================== */
 /* =                             EVENTLISTENERS                             = */
