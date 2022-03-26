@@ -22,7 +22,7 @@ import {
     aboutInput,
 } from "../scripts/utils/settings.js";
 import logoSRC from "../images/logo.svg";
-import avatarSRC from "../images/avatar.jpg";
+// import avatarSRC from "../images/avatar.jpg";
 import "./index.css";
 
 /* ========================================================================== */
@@ -30,8 +30,8 @@ import "./index.css";
 /* ========================================================================== */
 const pageLogo = document.querySelector("#logo");
 pageLogo.src = logoSRC;
-const pageAvatar = document.querySelector("#avatar");
-pageAvatar.src = avatarSRC;
+// const pageAvatar = document.querySelector("#avatar");
+// pageAvatar.src = avatarSRC;
 
 /* ========================================================================== */
 /* =                               FUNCTIONS                                = */
