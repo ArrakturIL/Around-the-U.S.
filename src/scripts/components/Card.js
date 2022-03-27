@@ -12,12 +12,16 @@ export default class Card {
         cardSelector,
         handleCardClick,
         likeCountSelector,
+        handleDeleteClick,
+        handleLikeClick
     ) {
         this._title = name;
         this._img = link;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this._likeCountElement = likeCountSelector;
+        this._handleDeleteClick = handleDeleteClick;
+        this._handleLikeClick = handleLikeClick;
 
         this._id = id;
         this._isOwner = isOwner;
@@ -32,6 +36,7 @@ export default class Card {
         return cardElement;
     }
     generateCard() {
+        
         this._card = this._getTemplate();
         const cardTitle = this._card.querySelector(".element__post-name");
         this._cardImg = this._card.querySelector(".element__post-img");
@@ -55,6 +60,7 @@ export default class Card {
         
         this._setEventListeners();
         this._renderLikes();
+        
         return this._card;
     }
 
@@ -69,20 +75,15 @@ export default class Card {
         this._renderLikes();
     }
 
-
-    _deleteCard = () => {
-        this._card.remove();
-        this._card = null;
-    };
-
-    _likeCard = () => {
-        this._likeButton.classList.toggle("element__post-like_active");
-    };
-
     _setEventListeners() {
-        this._deleteButton.addEventListener("click", this._deleteCard);
-        this._likeButton.addEventListener("click", this._likeCard);
+        this._likeButton.addEventListener("click", () => 
+            this._handleLikeClick(this._id, this._likeButton.classList.toggle("element__post-like_active"), this)
+        );
 
+        if (this._isOwner) {
+            this._deleteButton.addEventListener("click", (evt) =>
+                this._handleDeleteClick(this._id, this._card));
+        }
 
         this._cardImg.addEventListener("click", () => {
             this._handleCardClick();

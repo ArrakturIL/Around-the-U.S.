@@ -31,6 +31,6 @@ export default class Api {
     updateUserImage = (avatar) => this._fetch("PATCH", "/users/me/avatar", {avatar})
     addCard = (name, link) => this._fetch("POST", "/cards", {name, link})
     deleteCard = (cardId) => this._fetch("DELETE", `/cards/${cardId}`)
-    likeCard = (cardId) => this._fetch("PUT", `/cards/like/${cardId}`)
-    dislikeCard = (cardId) => this._fetch("PUT", `/cards/dislike/${cardId}`)
+    likeCard = (cardId) => this._fetch("PUT", `/cards/likes/${cardId}`)
+    dislikeCard = (cardId) => this._fetch("DELETE", `/cards/likes/${cardId}`)
 }

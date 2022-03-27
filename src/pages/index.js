@@ -4,11 +4,12 @@
 import Api from "../scripts/utils/Api.js";
 import FormValidator from "../scripts/components/FormValidator.js";
 import Section from "../scripts/components/Section.js";
-import { initialCards } from "../scripts/utils/cards.js";
+// import { initialCards } from "../scripts/utils/cards.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 import Card from "../scripts/components/Card.js";
+import PopupWithConfirmation from "../scripts/components/PopupWithConfirmation.js";
 import {
     formValidatorData,
     elementsSettings,
@@ -21,9 +22,12 @@ import {
     nameInput,
     aboutInput,
     saveProfileButton,
+    saveNewCardButton,
+    avatarEditButton,
+    avatarSubmitButton,
+    avatarEditFormPopup
 } from "../scripts/utils/settings.js";
 import logoSRC from "../images/logo.svg";
-// import avatarSRC from "../images/avatar.jpg";
 import "./index.css";
 
 /* ========================================================================== */
@@ -34,10 +38,12 @@ const api = new Api(
     "https://around.nomoreparties.co/v1/group-12/",
     "32f9436c-0893-4974-9272-aec5c5f4dcc9"
 );
+///---------------------------INITIAL DATA-----------------------------------///
 api.init()
     .then(([cards, user]) => {
         userInfo.setUserInfo(user);
         userInfo.setUserAvatar(user);
+
         cardsGallery.setItems(cards);
         cardsGallery.renderItems();
     })
@@ -50,28 +56,9 @@ api.init()
 /* ========================================================================== */
 const pageLogo = document.querySelector("#logo");
 pageLogo.src = logoSRC;
-// const pageAvatar = document.querySelector("#avatar");
-// pageAvatar.src = avatarSRC;
 
-/* ========================================================================== */
-/* =                               FUNCTIONS                                = */
-/* ========================================================================== */
-
-export function fillProfileForm() {
-    const { name, about } = userInfo.getUserInfo();
-    nameInput.value = name;
-    aboutInput.value = about;
-}
-
-///----------------------------CREATE CARD with POPUP WITH IMAGE----------------------------------///
-export const createCard = ({
-    name,
-    link,
-    id,
-    isOwner,
-    likeCount,
-    likedByOwner,
-}) => {
+///----------------------------CREATE CARD + PREVIEW POPUP WITH IMAGE----------------------------------///
+const createCard = ({ name, link, id, isOwner, likeCount, likedByOwner }) => {
     const card = new Card(
         {
             name,
@@ -85,7 +72,9 @@ export const createCard = ({
         () => {
             imagePreview.open(name, link);
         },
-        ".element__like-count"
+        ".element__like-count",
+        handleDeleteClick,
+        handleLikeClick
     );
     const cardElement = card.generateCard();
     return cardElement;
@@ -97,24 +86,26 @@ export const createCard = ({
 
 ///----------------------------FORMVALIDATOR----------------------------///
 
-export const profileFormValidator = new FormValidator(
+const profileFormValidator = new FormValidator(
     formValidatorData,
     editProfilePopup
 );
-export const cardFormValidator = new FormValidator(
+const cardFormValidator = new FormValidator(formValidatorData, addNewCardPopup);
+
+const avatarFormValidator = new FormValidator(
     formValidatorData,
-    addNewCardPopup
+    avatarEditFormPopup
 );
 
 ///----------------------------USER INFO----------------------------------///
-export const userInfo = new UserInfo({
+const userInfo = new UserInfo({
     nameSelector: formSettings.profileNameSelector,
     aboutSelector: formSettings.profileAboutSelector,
     avatarSelector: formSettings.profileAvatarSelector,
 });
 ///----------------------------POPUP WITH IMAGE----------------------------///
 
-export const imagePreview = new PopupWithImage({
+const imagePreview = new PopupWithImage({
     popupSelector: popupImageSettings.popupPreviewSelector,
     imageSelector: popupImageSettings.popupImageSelector,
     imageTitleSelector: popupImageSettings.popupImageTitleSelector,
@@ -124,19 +115,8 @@ export const imagePreview = new PopupWithImage({
 
 const cardsGallery = new Section(
     {
-        renderer: (item) => {
-            cardsGallery.addItem(
-                createCard({
-                    name: item.name,
-                    link: item.link,
-                    id: item.id,
-                    isOwner: item.owner._id === userInfo.getUserId(),
-                    likeCount: item.likes.length,
-                    likedByOwner: item.likes.some(
-                        (like) => like._id === userInfo.getUserId()
-                    ),
-                })
-            );
+        renderer: (card) => {
+            cardsGallery.addItem(renderCard(card));
         },
     },
     elementsSettings.cardListSelector
@@ -144,7 +124,7 @@ const cardsGallery = new Section(
 
 ///----------------------------POPUP FROM PROFILE----------------------------///
 
-export const profilePopup = new PopupWithForm(
+const profilePopup = new PopupWithForm(
     elementsSettings.editProfileSelector,
     (evt) => {
         evt.preventDefault();
@@ -163,21 +143,103 @@ export const profilePopup = new PopupWithForm(
             });
     }
 );
-// ///----------------------------POPUP FROM ADD NEW CARD----------------------------///
-export const cardPopup = new PopupWithForm(
+///----------------------------POPUP FROM ADD NEW CARD----------------------------///
+const cardPopup = new PopupWithForm(
     elementsSettings.addNewCardSelector,
     (evt) => {
         evt.preventDefault();
+        saveNewCardButton.textContent = "Creating...";
         const { title, link } = cardPopup.getInputValues();
-        cardsGallery.addItem(
-            createCard({
-                name: title,
-                link,
+        api.addCard(title, link)
+            .then((card) => {
+                cardsGallery.addItem(renderCard(card));
+                cardPopup.close();
             })
-        );
-        cardPopup.close();
+            .catch((err) => {
+                console.log(`Error.....: ${err}`);
+            })
+            .finally(() => {
+                saveNewCardButton.textContent = "Create";
+            });
     }
 );
+///----------------------------POPUP FORM AVATAR EDIT----------------------------///
+const avatarEditPopup = new PopupWithForm(
+    elementsSettings.avatarEditSelector,
+    (evt) => {
+        evt.preventDefault();
+        avatarSubmitButton.textContent = "Saving...";
+        const {avatar} = avatarEditPopup.getInputValues();
+        api.updateUserImage(avatar)
+            .then((avatar) => {
+                userInfo.setUserAvatar(avatar);
+                avatarEditPopup.close();
+            })
+            .catch((err) => {
+                console.log(`Error.....: ${err}`);
+            })
+            .finally(() => {
+                avatarSubmitButton.textContent = "Save";
+            });
+    }
+);
+
+///----------------------------POPUP WITH CONFIRMATION----------------------------///
+
+const deleteCardPopup = new PopupWithConfirmation(
+    elementsSettings.deleteConfirmSelector,
+    handleConfirmDeleteCard
+);
+
+/* ========================================================================== */
+/* =                               FUNCTIONS                                = */
+/* ========================================================================== */
+
+function fillProfileForm() {
+    const { name, about } = userInfo.getUserInfo();
+    nameInput.value = name;
+    aboutInput.value = about;
+}
+
+function renderCard(card) {
+    const { name, link, likes, owner, _id: id } = card;
+    const isOwner = owner._id === userInfo.getUserId();
+    const likeCount = likes.length;
+    const likedByOwner = likes.some((like) => like._id == userInfo.getUserId());
+    return createCard({ name, link, isOwner, id, likeCount, likedByOwner });
+}
+
+function handleDeleteClick(cardId, cardElement) {
+    deleteCardPopup.open(cardId, cardElement);
+}
+
+function handleConfirmDeleteCard(cardId, cardElement) {
+    api.deleteCard(cardId)
+        .then(() => {
+            cardElement.remove();
+        })
+        .catch((err) => {
+            console.log(`Error.....: ${err}`);
+        });
+}
+
+function handleLikeClick(cardId, liked, cardElement) {
+    const updateLikeCount = (res) =>
+        cardElement.updateLikeCount(res.likes.length);
+    if (liked) {
+        api.likeCard(cardId)
+            .then(updateLikeCount)
+            .catch((err) => {
+                console.log(`Error.....: ${err}`);
+            });
+    } else {
+        api.dislikeCard(cardId)
+            .then(updateLikeCount)
+            .catch((err) => {
+                console.log(`Error.....: ${err}`);
+            });
+    }
+}
 
 /* ========================================================================== */
 /* =                             EVENTLISTENERS                             = */
@@ -194,5 +256,11 @@ openAddFormButton.addEventListener("click", () => {
     cardPopup.open();
 });
 
+avatarEditButton.addEventListener("click", () => {
+    avatarFormValidator.resetValidation();
+    avatarEditPopup.open();
+});
+
 profileFormValidator.enableValidation();
 cardFormValidator.enableValidation();
+avatarFormValidator.enableValidation();

@@ -14,10 +14,10 @@ export default class UserInfo {
         return info;
     }
 
-    setUserInfo({ name, about, id }) {
+    setUserInfo({ name, about, _id }) {
         this._nameElement.textContent = name;
         this._aboutElement.textContent = about;
-        this._userId = id;
+        this._userId = _id;
     }
     getUserId = () => this._userId;
 

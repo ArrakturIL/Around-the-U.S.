@@ -14,6 +14,8 @@ export const elementsSettings = {
     addNewCardSelector: ".popup_el_new-place",
     cardTemplateSelector: "#card-template",
     cardSelector: ".element",
+    deleteConfirmSelector: ".popup_el_delete",
+    avatarEditSelector: ".popup_el_avatar",
 };
 
 export const formSettings = {
@@ -50,6 +52,10 @@ export const addNewCardPopup = document.querySelector(".popup_el_new-place");
 export const nameInput = document.querySelector("#name");
 export const aboutInput = document.querySelector("#about");
 export const saveProfileButton = document.querySelector(".edit-form__save_el_profile");
+export const saveNewCardButton = document.querySelector(".edit-form__save_el_new-place");
+export const avatarEditButton = document.querySelector(".profile__avatar-edit");
+export const avatarSubmitButton = document.querySelector(".edit-form__save_el_avatar");
+export const avatarEditFormPopup = document.querySelector(".popup_el_avatar");
 //==============================================================================//
 
 

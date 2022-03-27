@@ -37,7 +37,7 @@
 @import url(../styles/blocks/profile/__about/profile__about.css);
 @import url(../styles/blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../styles/blocks/profile/__add-button/profile__add-button.css);
-@import url(../styles/blocks/profile/__edit-icon/profile__edit-icon.css);
+@import url(../styles/blocks/profile/__edit-icon/profile__avatar-edit.css);
 @import url(../styles/blocks/profile/__avatar-overlay/profile__avatar-overlay.css);
 /*ELEMENTS*/
 @import url(../styles/blocks/elements/elements.css);
