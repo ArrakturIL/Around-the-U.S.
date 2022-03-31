@@ -15,6 +15,14 @@ export default class PopupWithConfirmation extends Popup {
         super.open();
     }
 
+    // toggleLoading(isLoading) {
+    //     if (isLoading) {
+    //         this._submitButton.textContent = "Deliting...";
+    //     } else {
+    //         this._submitButton.textContent = "Delete";
+    //     }
+    // }
+
     _handleConfirmClick = (evt) => {
         evt.preventDefault();
         this._handleConfirm(this._cardId, this._card);
@@ -23,7 +31,7 @@ export default class PopupWithConfirmation extends Popup {
 
     setEventListeners() {
         super.setEventListeners();
-        this._submitButton.addEventListener("click", this._handleConfirmClick);
+        this._submitButton.addEventListener("click", this._handleConfirmClick, console.log("delete"));
     }
 
     close() {

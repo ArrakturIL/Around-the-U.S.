@@ -1,4 +1,3 @@
-import { formSettings } from "../utils/settings.js";
 
 export default class UserInfo {
     constructor({ nameSelector, aboutSelector, avatarSelector }) {

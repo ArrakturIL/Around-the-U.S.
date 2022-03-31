@@ -51,11 +51,15 @@ export const editProfilePopup = document.querySelector(".popup_el_profile");
 export const addNewCardPopup = document.querySelector(".popup_el_new-place");
 export const nameInput = document.querySelector("#name");
 export const aboutInput = document.querySelector("#about");
-export const saveProfileButton = document.querySelector(".edit-form__save_el_profile");
-export const saveNewCardButton = document.querySelector(".edit-form__save_el_new-place");
+export const cardNameInput = addNewCardPopup.querySelector("#title");
+export const cardLinkInput = addNewCardPopup.querySelector("#link");
+
+// export const saveProfileButton = document.querySelector(".edit-form__save_el_profile");
+// export const saveNewCardButton = document.querySelector(".edit-form__save_el_new-place");
 export const avatarEditButton = document.querySelector(".profile__avatar-edit");
-export const avatarSubmitButton = document.querySelector(".edit-form__save_el_avatar");
+// export const avatarSubmitButton = document.querySelector(".edit-form__save_el_avatar");
 export const avatarEditFormPopup = document.querySelector(".popup_el_avatar");
+// export const submitButton = document.querySelector(".edit-form__save");
 //==============================================================================//
 
 

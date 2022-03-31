@@ -3,6 +3,7 @@ export default class Popup {
     constructor(popupSelector) {
         this._popupSelector = popupSelector;
         this._popup = document.querySelector(this._popupSelector);
+        this._editSaveButton = this._popup.querySelector(".edit-form__save");
         
     }
     open() {
@@ -13,6 +14,11 @@ export default class Popup {
         this._popup.classList.remove("popup_open");
         this.removeEventListeners();
     }
+
+    renderButtonText = (text) => {
+        if(this._editSaveButton) this._editSaveButton.textContent = text;
+    }
+
     _handleEscKey = (evt) => {
         if (evt.key === "Escape") {
             this.close();

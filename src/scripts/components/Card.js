@@ -2,19 +2,23 @@
 /* =                             IMPORTS                                    = */
 /* ========================================================================== */
 
+
 /* ========================================================================== */
 /* =                             CARD CLASS                                 = */
 /* ========================================================================== */
 
 export default class Card {
     constructor(
-        { name, link, id, isOwner, likeCount = 0, likedByOwner = false },
+        cardData,
+        userId,
         cardSelector,
         handleCardClick,
         likeCountSelector,
         handleDeleteClick,
         handleLikeClick
     ) {
+        const {name, link, likes, _id, owner,} = cardData;
+        this._userId = userId;
         this._title = name;
         this._img = link;
         this._cardSelector = cardSelector;
@@ -23,10 +27,12 @@ export default class Card {
         this._handleDeleteClick = handleDeleteClick;
         this._handleLikeClick = handleLikeClick;
 
-        this._id = id;
-        this._isOwner = isOwner;
-        this._likeCount = likeCount;
-        this._likedByOwner = likedByOwner;
+        this._id = _id;
+        this._isOwner = owner._id === this._userId;
+        this._likeCount = likes.length;
+        this._likes = likes;
+        this._likedByOwner = this.isLiked();
+        
     }
     _getTemplate() {
         const cardElement = document
@@ -54,9 +60,9 @@ export default class Card {
             this._deleteButton.remove();
         }
 
-        if (this._likedByOwner) {
-            this._likeButton.classList.add("element__post-like_active");
-        }
+        // if (this._likedByOwner) {
+        //     this._likeButton.classList.add("element__post-like_active");
+        // }
         
         this._setEventListeners();
         this._renderLikes();
@@ -64,20 +70,34 @@ export default class Card {
         return this._card;
     }
 
+
+    isLiked() {
+        return this._likes.some((like) => like._id === this._userId);
+    }
+
+    
     _renderLikes() {
         const hasLikes = this._likeCount > 0;
         this._likeCountElement.textContent = this._likeCount;
-        this._likeCountElement.style.display = hasLikes ? "block" : "none";
+        this._likeCountElement.style.display =  hasLikes ? "block" : "none";
+
+        if (this.isLiked()) {
+            this._likeButton.classList.add("element__post-like_active");
+        } else {
+            this._likeButton.classList.remove("element__post-like_active");
+        }
     }
 
-    updateLikeCount(likes) {
-        this._likeCount = likes;
+    updateLikes(likes) {
+        this._likeCount = likes.length;
+        this._likes = likes;
         this._renderLikes();
     }
+    
 
     _setEventListeners() {
         this._likeButton.addEventListener("click", () => 
-            this._handleLikeClick(this._id, this._likeButton.classList.toggle("element__post-like_active"), this)
+            this._handleLikeClick(this._id, this)
         );
 
         if (this._isOwner) {

@@ -21,11 +21,8 @@ import {
     openAddFormButton,
     nameInput,
     aboutInput,
-    saveProfileButton,
-    saveNewCardButton,
     avatarEditButton,
-    avatarSubmitButton,
-    avatarEditFormPopup
+    avatarEditFormPopup,
 } from "../scripts/utils/settings.js";
 import logoSRC from "../images/logo.svg";
 import "./index.css";
@@ -58,19 +55,13 @@ const pageLogo = document.querySelector("#logo");
 pageLogo.src = logoSRC;
 
 ///----------------------------CREATE CARD + PREVIEW POPUP WITH IMAGE----------------------------------///
-const createCard = ({ name, link, id, isOwner, likeCount, likedByOwner }) => {
+const createCard = (cardData) => {
     const card = new Card(
-        {
-            name,
-            link,
-            id,
-            isOwner,
-            likeCount,
-            likedByOwner,
-        },
+        cardData,
+        userInfo.getUserId(),
         "#card-template",
         () => {
-            imagePreview.open(name, link);
+            imagePreview.open(cardData);
         },
         ".element__like-count",
         handleDeleteClick,
@@ -116,7 +107,7 @@ const imagePreview = new PopupWithImage({
 const cardsGallery = new Section(
     {
         renderer: (card) => {
-            cardsGallery.addItem(renderCard(card));
+            cardsGallery.addItem(createCard(card));
         },
     },
     elementsSettings.cardListSelector
@@ -126,10 +117,9 @@ const cardsGallery = new Section(
 
 const profilePopup = new PopupWithForm(
     elementsSettings.editProfileSelector,
-    (evt) => {
-        evt.preventDefault();
-        saveProfileButton.textContent = "Saving...";
-        const { name, about } = profilePopup.getInputValues();
+    ({ name, about }) => {
+        profilePopup.renderButtonText("Saving...");
+
         api.updateUserInfo({ name, about })
             .then(() => {
                 userInfo.setUserInfo({ name, about });
@@ -139,37 +129,35 @@ const profilePopup = new PopupWithForm(
                 console.log(`Error.....: ${err}`);
             })
             .finally(() => {
-                saveProfileButton.textContent = "Save";
+                profilePopup.renderButtonText("Save");
             });
     }
 );
 ///----------------------------POPUP FROM ADD NEW CARD----------------------------///
 const cardPopup = new PopupWithForm(
     elementsSettings.addNewCardSelector,
-    (evt) => {
-        evt.preventDefault();
-        saveNewCardButton.textContent = "Creating...";
-        const { title, link } = cardPopup.getInputValues();
-        api.addCard(title, link)
+    ({ title: name, link }) => {
+        cardPopup.renderButtonText("Creating...");
+
+        api.addCard(name, link)
             .then((card) => {
-                cardsGallery.addItem(renderCard(card));
+                cardsGallery.addItem(createCard(card));
                 cardPopup.close();
             })
             .catch((err) => {
                 console.log(`Error.....: ${err}`);
             })
             .finally(() => {
-                saveNewCardButton.textContent = "Create";
+                cardPopup.renderButtonText("Create");
             });
     }
 );
+
 ///----------------------------POPUP FORM AVATAR EDIT----------------------------///
 const avatarEditPopup = new PopupWithForm(
     elementsSettings.avatarEditSelector,
-    (evt) => {
-        evt.preventDefault();
-        avatarSubmitButton.textContent = "Saving...";
-        const {avatar} = avatarEditPopup.getInputValues();
+    ({ avatar }) => {
+        avatarEditPopup.renderButtonText("Saving...");
         api.updateUserImage(avatar)
             .then((avatar) => {
                 userInfo.setUserAvatar(avatar);
@@ -179,7 +167,7 @@ const avatarEditPopup = new PopupWithForm(
                 console.log(`Error.....: ${err}`);
             })
             .finally(() => {
-                avatarSubmitButton.textContent = "Save";
+                avatarEditPopup.renderButtonText("Save");
             });
     }
 );
@@ -188,7 +176,19 @@ const avatarEditPopup = new PopupWithForm(
 
 const deleteCardPopup = new PopupWithConfirmation(
     elementsSettings.deleteConfirmSelector,
-    handleConfirmDeleteCard
+    (cardId, cardElement) => {
+        deleteCardPopup.renderButtonText("Deliting...");
+        api.deleteCard(cardId)
+            .then(() => {
+                cardElement.remove();
+            })
+            .catch((err) => {
+                console.log(`Error.....: ${err}`);
+            })
+            .finally(() => {
+                deleteCardPopup.renderButtonText("Delete");
+            });
+    }
 );
 
 /* ========================================================================== */
@@ -201,40 +201,21 @@ function fillProfileForm() {
     aboutInput.value = about;
 }
 
-function renderCard(card) {
-    const { name, link, likes, owner, _id: id } = card;
-    const isOwner = owner._id === userInfo.getUserId();
-    const likeCount = likes.length;
-    const likedByOwner = likes.some((like) => like._id == userInfo.getUserId());
-    return createCard({ name, link, isOwner, id, likeCount, likedByOwner });
-}
-
 function handleDeleteClick(cardId, cardElement) {
     deleteCardPopup.open(cardId, cardElement);
 }
 
-function handleConfirmDeleteCard(cardId, cardElement) {
-    api.deleteCard(cardId)
-        .then(() => {
-            cardElement.remove();
-        })
-        .catch((err) => {
-            console.log(`Error.....: ${err}`);
-        });
-}
-
-function handleLikeClick(cardId, liked, cardElement) {
-    const updateLikeCount = (res) =>
-        cardElement.updateLikeCount(res.likes.length);
-    if (liked) {
-        api.likeCard(cardId)
-            .then(updateLikeCount)
+function handleLikeClick(cardId, cardElement) {
+    const updateLikeCounts = (res) => cardElement.updateLikes(res.likes);
+    if (cardElement.isLiked()) {
+        api.dislikeCard(cardId)
+            .then(updateLikeCounts)
             .catch((err) => {
                 console.log(`Error.....: ${err}`);
             });
     } else {
-        api.dislikeCard(cardId)
-            .then(updateLikeCount)
+        api.likeCard(cardId)
+            .then(updateLikeCounts)
             .catch((err) => {
                 console.log(`Error.....: ${err}`);
             });

@@ -26,11 +26,18 @@ export default class Api {
     init = () => Promise.all([this._getInitialCards(), this._getUserInfo()])
 
     _getInitialCards = () => this._fetch("GET", "/cards")
+
     _getUserInfo = () => this._fetch("GET", "/users/me")
+
     updateUserInfo = ({name, about}) => this._fetch("PATCH", "/users/me", {name, about})
+
     updateUserImage = (avatar) => this._fetch("PATCH", "/users/me/avatar", {avatar})
+
     addCard = (name, link) => this._fetch("POST", "/cards", {name, link})
+
     deleteCard = (cardId) => this._fetch("DELETE", `/cards/${cardId}`)
+
     likeCard = (cardId) => this._fetch("PUT", `/cards/likes/${cardId}`)
+    
     dislikeCard = (cardId) => this._fetch("DELETE", `/cards/likes/${cardId}`)
 }

@@ -4,7 +4,7 @@
     align-content: center;
     display: grid;
     gap: 16px 18px;
-    grid-template-columns: auto min-content;
+    grid-template-columns: auto;
     grid-template-rows: min-content;
     grid-template-areas:
         "name button"
